@@ -7,3 +7,9 @@ android:layout_height="38dp"
 android:layout_height="45dp"
 
 android:layout_weight="0.15"
+
+android:background="@drawable/ic_brightness_1_black_24dp"
+
+android:tint="@android:color/background_light"
+
+android:src="@drawable/ic_home_black_24dp"

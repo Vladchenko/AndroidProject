@@ -10,7 +10,8 @@ import android.os.Parcelable;
 public class BankDetails implements Parcelable {
 
     private String address;
-    private String name;
+    private String distance;
+    private String name; // extra office
     private String latitude;
     private String longtitude;
     private String workMode;
@@ -113,5 +114,13 @@ public class BankDetails implements Parcelable {
 
     public void setQualityControl(String qualityControl) {
         this.qualityControl = qualityControl;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
     }
 }
