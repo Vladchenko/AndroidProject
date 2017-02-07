@@ -1,5 +1,6 @@
 package com.example.vladislav.androidtest;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,8 +9,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vladislav.androidtest.entities.BankDetails;
 
@@ -19,25 +22,27 @@ public class DetailedInfoActivity extends AppCompatActivity {
     TextView textView;
     private Button button;
     final Context context = this;
+    CharSequence[] grpname = {"1","2","3","4","5"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed_info);
         Intent intent = getIntent();
         Parcelable bankDetails = (Parcelable) intent.getParcelableExtra("bankDetails");
 
         temp = ((BankDetails) bankDetails).getAddress();
-        textView = (TextView)findViewById(R.id.address_text_view);
+        textView = (TextView) findViewById(R.id.address_text_view);
         textView.setText(temp);
 
         temp = ((BankDetails) bankDetails).getName();
         TextView textView2;
-        textView2 = (TextView)findViewById(R.id.extra_office_text_view);
+        textView2 = (TextView) findViewById(R.id.extra_office_text_view);
         textView2.setText(temp);
 
         temp = ((BankDetails) bankDetails).getPhoneNumber();
-        textView = (TextView)findViewById(R.id.telephoneN_text_view);
+        textView = (TextView) findViewById(R.id.telephoneN_text_view);
         textView.setText(temp);
 
         button = (Button) findViewById(R.id.qualityEstimation_button);
@@ -52,24 +57,32 @@ public class DetailedInfoActivity extends AppCompatActivity {
                         context);
 
                 // set title
-                alertDialogBuilder.setTitle("Оцените качество, плиз");
+                alertDialogBuilder.setTitle("Пожалуйста оцените качество, работы нашего филиала.");
 
                 // set dialog message
                 alertDialogBuilder
-                        .setMessage("Click yes to exit!")
-                        .setCancelable(false)
-                        .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                // if this button is clicked, close
-                                // current activity
-                                DetailedInfoActivity.this.finish();
-                            }
-                        })
-                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                // if this button is clicked, just close
-                                // the dialog box and do nothing
-                                dialog.cancel();
+//                        .setMessage("Click yes to exit!")
+                        .setCancelable(true)
+//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                // if this button is clicked, close
+//                                // current activity
+//                                DetailedInfoActivity.this.finish();
+//                            }
+//                        })
+//                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//                                // if this button is clicked, just close
+//                                // the dialog box and do nothing
+//                                dialog.cancel();
+//                            }
+//                        })
+                        .setSingleChoiceItems(grpname, -1, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int item) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Вы дали оценку " + grpname[item], Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();// dismiss the alertbox after chose option
+
                             }
                         });
 
@@ -81,6 +94,6 @@ public class DetailedInfoActivity extends AppCompatActivity {
             }
         });
 
-
     }
+
 }
