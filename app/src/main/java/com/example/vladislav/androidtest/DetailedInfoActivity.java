@@ -27,7 +27,7 @@ public class DetailedInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailed_info);
+        setContentView(R.layout.detailed_info_activity);
         Intent intent = getIntent();
         Parcelable bankDetails = (Parcelable) intent.getParcelableExtra("bankDetails");
 
@@ -36,12 +36,16 @@ public class DetailedInfoActivity extends AppCompatActivity {
         textView.setText(temp);
 
         temp = ((BankDetails) bankDetails).getName();
-        TextView textView2;
-        textView2 = (TextView) findViewById(R.id.extra_office_text_view);
-        textView2.setText(temp);
+//        TextView textView2;
+        textView = (TextView) findViewById(R.id.extra_office_text_view);
+        textView.setText(temp);
 
         temp = ((BankDetails) bankDetails).getPhoneNumber();
         textView = (TextView) findViewById(R.id.telephoneN_text_view);
+        textView.setText(temp);
+
+        temp = ((BankDetails) bankDetails).getDistance();
+        textView = (TextView) findViewById(R.id.distance_text_view);
         textView.setText(temp);
 
         button = (Button) findViewById(R.id.qualityEstimation_button);
