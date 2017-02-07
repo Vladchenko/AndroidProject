@@ -43,7 +43,6 @@
 
         </LinearLayout>
 
-
         <RelativeLayout
             android:id="@+id/directionDistance"
             android:layout_width="wrap_content"
@@ -345,5 +344,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@android:color/darker_gray" />
+
+    <Button
+        android:text="@string/quality_estimation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/qualityEstimation" />
 
 </LinearLayout>
