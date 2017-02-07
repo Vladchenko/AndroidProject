@@ -16,6 +16,6 @@
     <dimen name="divider_thickness">2dp</dimen>
     <dimen name="extra_office_text_size">10sp</dimen>
     <dimen name="extra_office_layout_height">20dp</dimen>
-
+    <dimen name="week_days_margin">12dp</dimen>
 
 </resources>

@@ -150,70 +150,71 @@
             android:id="@+id/weekDays"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginRight="120dp">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/monday_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
                 android:text="Понедельник"
                 android:textColor="@android:color/background_dark"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/week_days_margin" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/tuesday_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
                 android:text="Вторник"
                 android:textColor="@android:color/background_dark"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/week_days_margin" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/wednesday_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
                 android:text="Среда"
                 android:textColor="@android:color/background_dark"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/week_days_margin" />
 
             <TextView
-                android:id="@+id/day_of_week"
+                android:id="@+id/thursday_text_week"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
                 android:text="Четверг"
                 android:textColor="@android:color/background_dark"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/week_days_margin" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/friday_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
                 android:text="Пятница"
                 android:textColor="@android:color/background_dark"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/week_days_margin" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/saturday_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
                 android:text="Суббота"
                 android:textColor="@android:color/holo_green_dark"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/week_days_margin" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/sunday_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
                 android:text="Воскресенье"
                 android:textColor="@android:color/background_dark"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/week_days_margin" />
 
         </LinearLayout>
 
@@ -224,67 +225,67 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView_"
+                android:id="@+id/monday_hours_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
                 android:text="10.00-19.00"
                 android:textColor="@android:color/background_dark"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/week_days_margin" />
 
             <TextView
-                android:id="@+id/textView_2"
+                android:id="@+id/tuesday_hours_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
                 android:text="10.00-19.00"
                 android:textColor="@android:color/background_dark"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/week_days_margin" />
 
             <TextView
-                android:id="@+id/textView_3"
+                android:id="@+id/wednesday_hours_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
                 android:text="10.00-19.00"
                 android:textColor="@android:color/background_dark"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/week_days_margin" />
 
             <TextView
-                android:id="@+id/textView_4"
+                android:id="@+id/thursday_hours_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
                 android:text="10.00-19.00"
                 android:textColor="@android:color/background_dark"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/week_days_margin" />
 
             <TextView
-                android:id="@+id/textView_5"
+                android:id="@+id/friday_hours_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
                 android:text="10.00-19.00"
                 android:textColor="@android:color/background_dark"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/week_days_margin" />
 
             <TextView
-                android:id="@+id/textView_6"
+                android:id="@+id/saturday_hours_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
                 android:text="Закрыто"
                 android:textColor="@android:color/holo_green_dark"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/week_days_margin" />
 
             <TextView
-                android:id="@+id/textView_8"
+                android:id="@+id/sunday_hours_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
                 android:text="Закрыто"
                 android:textColor="@android:color/background_dark"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/week_days_margin" />
 
         </LinearLayout>
 
