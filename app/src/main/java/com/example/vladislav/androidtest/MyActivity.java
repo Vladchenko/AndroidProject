@@ -24,6 +24,7 @@ public class MyActivity extends Activity {
 
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter adapter;
+    private String estimationMark;
 
     List<BankDetails> list;
 
@@ -42,7 +43,9 @@ public class MyActivity extends Activity {
                         // Invoke an activity with detailed info of a clicked bank
                         Intent intent = new Intent(MyActivity.this,DetailedInfoActivity.class);
                         intent.putExtra("bankDetails", list.get(position));
-                        startActivity(intent);
+//                        startActivity(intent);
+                        // Getting a result for
+                        startActivityForResult(intent, 1);  // 1 is some request code.
                     }
                 })
         );
@@ -51,6 +54,15 @@ public class MyActivity extends Activity {
 
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                estimationMark = data.getStringExtra("estimationMark");
+                System.out.println("estimationMark = " + estimationMark);
+            }
+        }
+    }
 
     void initRecyclerView(){
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -7,8 +7,8 @@ import android.support.v7.widget.RecyclerView;
 public class MainActivity extends AppCompatActivity {
 
     public MainActivity() {
-        BanksDetailsOperating banksDetailsOperating = new BanksDetailsOperating();
-        banksDetailsOperating.printBanksDetailsByDefault();
+//        BanksDetailsOperating banksDetailsOperating = new BanksDetailsOperating();
+//        banksDetailsOperating.printBanksDetailsByDefault();
     }
 
     @Override

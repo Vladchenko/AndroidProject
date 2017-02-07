@@ -28,6 +28,7 @@ public class BanksDetailsOperating {
             banksDetails.get(i).setAddress("Тукая, " + (int)(Math.random() * 100));
             banksDetails.get(i).setLatitude((int)(Math.random() * 100) + "." + (int)(Math.random() * 10000));
             banksDetails.get(i).setLongtitude((int)(Math.random() * 100) + "." + (int)(Math.random() * 10000));
+            banksDetails.get(i).setDistance((int)(Math.random() * 20) + "." + (int)(Math.random() * 100) + " км.");
             banksDetails.get(i).setName("Банк Авангард");
             banksDetails.get(i).setPhoneNumber("+7 (" + (int)(Math.random() * 10000) + ") "
                     + (int)(Math.random() * 1000)

@@ -1,6 +1,5 @@
 package com.example.vladislav.androidtest;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,7 +8,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +20,8 @@ public class DetailedInfoActivity extends AppCompatActivity {
     TextView textView;
     private Button button;
     final Context context = this;
-    CharSequence[] grpname = {"1","2","3","4","5"};
+    CharSequence[] estimationGroup = {"1", "2", "3", "4", "5"};
+    String estimationMark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,12 +76,16 @@ public class DetailedInfoActivity extends AppCompatActivity {
 //                                dialog.cancel();
 //                            }
 //                        })
-                        .setSingleChoiceItems(grpname, -1, new DialogInterface.OnClickListener() {
+                        .setSingleChoiceItems(estimationGroup, -1, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int item) {
                                 Toast.makeText(getApplicationContext(),
-                                        "Вы дали оценку " + grpname[item], Toast.LENGTH_SHORT).show();
+                                        "Вы дали оценку " + estimationGroup[item], Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();// dismiss the alertbox after chose option
-
+                                Intent intent = new Intent();
+                                estimationMark = (String)estimationGroup[item];
+                                intent.putExtra("estimationMark",estimationMark);
+                                setResult(RESULT_OK, intent);
+                                finish();
                             }
                         });
 

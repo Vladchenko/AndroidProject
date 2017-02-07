@@ -38,6 +38,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.addressTextView.setText(bankDetails.getAddress());
         holder.distanceTextView.setText(bankDetails.getDistance());
         holder.extraOfficeTextView.setText(bankDetails.getName());
+        // No phone number in recycler layout
+//        holder.telephoneNTextView.setText(bankDetails.getPhoneNumber());
     }
 
     @Override
@@ -50,14 +52,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView addressTextView;
         TextView extraOfficeTextView;
         TextView distanceTextView;
-        TextView telephoneNTextView;
+        // No phone number in recycler layout
+//        TextView telephoneNTextView;
 
         public ViewHolder2(View itemView) {
             super(itemView);
             addressTextView = (TextView)itemView.findViewById(R.id.address_text_view);
             extraOfficeTextView = (TextView)itemView.findViewById(R.id.extra_office_text_view);
             distanceTextView = (TextView)itemView.findViewById(R.id.distance_text_view);
-            telephoneNTextView = (TextView)itemView.findViewById(R.id.telephoneN_text_view);
+            // No phone number in recycler layout
+//            telephoneNTextView = (TextView)itemView.findViewById(R.id.telephoneN_text_view);
             // No need to pass an image, it's already present in an activity.
         }
 
