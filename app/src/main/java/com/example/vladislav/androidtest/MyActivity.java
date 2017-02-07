@@ -1,12 +1,16 @@
 package com.example.vladislav.androidtest;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 
 import com.example.vladislav.androidtest.entities.BankDetails;
 
@@ -44,6 +48,7 @@ public class MyActivity extends Activity {
         );
         adapter = new RecyclerViewAdapter(list);
         initRecyclerView();
+
     }
 
 
