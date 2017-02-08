@@ -1,4 +1,4 @@
-package com.example.vladislav.androidtest;
+package com.example.vladislav.androidtest.activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,16 +12,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.vladislav.androidtest.R;
 import com.example.vladislav.androidtest.entities.BankDetails;
 
 public class DetailedInfoActivity extends AppCompatActivity {
 
-    String temp;
-    TextView textView;
+    public static final String EXTRA_BANK = "com.example.vladislav.androidtest.EXTRA_BANK";
+
+    private String temp;
+    private TextView textView;
     private Button button;
-    final Context context = this;
-    CharSequence[] estimationGroup = {"1", "2", "3", "4", "5"};
-    String estimationMark;
+    private final Context context = this;
+    private CharSequence[] estimationGroup = {"1", "2", "3", "4", "5"};
+    private String estimationMark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,22 +32,22 @@ public class DetailedInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detailed_info_activity);
         Intent intent = getIntent();
-        Parcelable bankDetails = (Parcelable) intent.getParcelableExtra("bankDetails");
+        Parcelable extraBank = (Parcelable) intent.getParcelableExtra(EXTRA_BANK);
 
-        temp = ((BankDetails) bankDetails).getAddress();
+        temp = ((BankDetails) extraBank).getAddress();
         textView = (TextView) findViewById(R.id.address_text_view);
         textView.setText(temp);
 
-        temp = ((BankDetails) bankDetails).getName();
+        temp = ((BankDetails) extraBank).getName();
 //        TextView textView2;
         textView = (TextView) findViewById(R.id.extra_office_text_view);
         textView.setText(temp);
 
-        temp = ((BankDetails) bankDetails).getPhoneNumber();
+        temp = ((BankDetails) extraBank).getPhoneNumber();
         textView = (TextView) findViewById(R.id.telephoneN_text_view);
         textView.setText(temp);
 
-        temp = ((BankDetails) bankDetails).getDistance();
+        temp = ((BankDetails) extraBank).getDistance();
         textView = (TextView) findViewById(R.id.distance_text_view);
         textView.setText(temp);
 

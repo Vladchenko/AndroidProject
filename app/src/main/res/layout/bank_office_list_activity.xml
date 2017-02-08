@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    tools:context="com.example.vladislav.androidtest.MainActivity">
+    tools:context="com.example.vladislav.androidtest.activities.BankOfficeListActivity">
 
     <!-- Component that is to be used as a container to hold a list of a banks details.
-     recycler_view_item is used to represent each element from a list of banks details. -->
+     bank_office_item is used to represent each element from a list of banks details. -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"

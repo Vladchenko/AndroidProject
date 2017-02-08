@@ -1,4 +1,4 @@
-package com.example.vladislav.androidtest;
+package com.example.vladislav.androidtest.listeners;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

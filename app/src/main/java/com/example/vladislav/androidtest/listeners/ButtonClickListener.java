@@ -1,4 +1,4 @@
-package com.example.vladislav.androidtest;
+package com.example.vladislav.androidtest.listeners;
 
 import android.app.Activity;
 import android.content.DialogInterface;

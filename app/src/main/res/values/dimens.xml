@@ -12,10 +12,12 @@
     <dimen name="address_text_size">20sp</dimen>
     <dimen name="distance_text_size">18sp</dimen>
     <dimen name="detailed_info_address_margin_right">130dp</dimen>
+    <dimen name="detailed_info_header_height">80dp</dimen>
     <dimen name="divider_margin">6dp</dimen>
     <dimen name="divider_thickness">2dp</dimen>
     <dimen name="extra_office_text_size">10sp</dimen>
     <dimen name="extra_office_layout_height">20dp</dimen>
     <dimen name="week_days_margin">12dp</dimen>
+    <dimen name="distance_right_padding">10dp</dimen>
 
 </resources>
