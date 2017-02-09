@@ -53,6 +53,7 @@ public class BanksDetailsOperating {
             System.out.println("Phone number is: " + banksDetails.get(i).getPhoneNumber());
             System.out.println("Quality control is: " + banksDetails.get(i).getQualityControl());
             System.out.println("Work mode is: " + banksDetails.get(i).getWorkMode());
+            System.out.println("Distance is: " + banksDetails.get(i).getDistance());
             System.out.println();
         }
 

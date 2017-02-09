@@ -23,6 +23,7 @@ public class BankDetails implements Parcelable {
         setName(in.readString());
         setLatitude(in.readString());
         setLongtitude(in.readString());
+        setDistance(in.readString());
         setWorkMode(in.readString());
         setPhoneNumber(in.readString());
         setQualityControl(in.readString());
@@ -55,6 +56,7 @@ public class BankDetails implements Parcelable {
         dest.writeString(getName());
         dest.writeString(getLatitude());
         dest.writeString(getLongtitude());
+        dest.writeString(getDistance());
         dest.writeString(getWorkMode());
         dest.writeString(getPhoneNumber());
         dest.writeString(getQualityControl());

@@ -67,7 +67,6 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/house_left_margin"
                 android:background="@drawable/ic_subdirectory_arrow_right_black_24dp"
-
                 android:backgroundTint="@android:color/background_light" />
 
             <TextView

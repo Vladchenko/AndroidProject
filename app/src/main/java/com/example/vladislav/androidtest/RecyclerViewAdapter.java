@@ -63,7 +63,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             // No need to pass an image, it's already present in an activity.
         }
 
-
     }
 
 }

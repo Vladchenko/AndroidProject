@@ -38,17 +38,16 @@ public class DetailedInfoActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.address_text_view);
         textView.setText(temp);
 
+        temp = ((BankDetails) extraBank).getDistance();
+        textView = (TextView) findViewById(R.id.distance_text_view);
+        textView.setText(temp);
+
         temp = ((BankDetails) extraBank).getName();
-//        TextView textView2;
         textView = (TextView) findViewById(R.id.extra_office_text_view);
         textView.setText(temp);
 
         temp = ((BankDetails) extraBank).getPhoneNumber();
         textView = (TextView) findViewById(R.id.telephoneN_text_view);
-        textView.setText(temp);
-
-        temp = ((BankDetails) extraBank).getDistance();
-        textView = (TextView) findViewById(R.id.distance_text_view);
         textView.setText(temp);
 
         button = (Button) findViewById(R.id.qualityEstimation_button);
@@ -85,14 +84,11 @@ public class DetailedInfoActivity extends AppCompatActivity {
 //                        })
                         .setSingleChoiceItems(estimationGroup, -1, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int item) {
-                                Toast.makeText(getApplicationContext(),
-                                        "Вы дали оценку " + estimationGroup[item], Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();// dismiss the alertbox after chose option
                                 Intent intent = new Intent();
                                 estimationMark = (String)estimationGroup[item];
                                 intent.putExtra("estimationMark",estimationMark);
                                 setResult(RESULT_OK, intent);
-                                finish();
                             }
                         });
 

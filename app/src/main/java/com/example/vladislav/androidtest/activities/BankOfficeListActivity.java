@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vladislav.androidtest.BanksDetailsOperating;
 import com.example.vladislav.androidtest.R;
@@ -23,7 +26,6 @@ public class BankOfficeListActivity extends Activity {
 
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter adapter;
-    private String estimationMark;
     private List<BankDetails> list;
 
     BanksDetailsOperating banksDetailsOperating = new BanksDetailsOperating();
@@ -48,6 +50,9 @@ public class BankOfficeListActivity extends Activity {
         );
         adapter = new RecyclerViewAdapter(list);
         initRecyclerView();
+        // Trying to make a house picture visible on an each circle in a list
+//        ImageView imageView = (ImageView) findViewById(R.id.house_image_view);
+//        imageView.setColorFilter(getResources().getColor(R.color.colorAccent));
 
     }
 
@@ -55,8 +60,11 @@ public class BankOfficeListActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if(resultCode == RESULT_OK){
-                estimationMark = data.getStringExtra("estimationMark");
+                String estimationMark = data.getStringExtra("estimationMark");
                 System.out.println("estimationMark = " + estimationMark);
+                Toast.makeText(getApplicationContext(),
+                        "Вы дали оценку " + estimationMark, Toast.LENGTH_SHORT).show();
+
             }
         }
     }

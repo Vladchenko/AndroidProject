@@ -17,8 +17,9 @@
         android:backgroundTint="@color/colorPrimary"
         android:contentDescription="Circle with a house in a center of it"
         android:scaleType="center"
+        app:srcCompat="@drawable/ic_home_black_24dp"
         android:tint="@android:color/background_light"
-        app:srcCompat="@drawable/ic_home_black_24dp" />
+         />
 
     <TextView
         android:id="@+id/address_text_view"
