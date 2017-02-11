@@ -47,9 +47,6 @@ public class DetailedInfoFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.detailed_info_fragment, container, false);
 
-        try {
-//            BankDetails bankOffice = savedInstanceState.getParcelable("bankOffice");
-
             textView = (TextView) view.findViewById(R.id.address_text_view);
             textView.setText(bankOffice.getAddress());
 
@@ -61,10 +58,6 @@ public class DetailedInfoFragment extends Fragment {
 
             textView = (TextView) view.findViewById(R.id.telephoneN_text_view);
             textView.setText(bankOffice.getPhoneNumber());
-
-        } catch (NullPointerException npe) {
-            Log.e("DetailedInfoFragment", "Some NPE occured!");
-        }
 
         return view;
     }
