@@ -17,7 +17,6 @@
         </activity>
         <activity android:name=".activities.DetailedInfoActivity" />
         <activity android:name=".activities.BankOfficeListActivity" />
-        <activity android:name=".activities.FragmentsActivityLandscape"></activity>
     </application>
 
 </manifest>

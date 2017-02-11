@@ -1,10 +1,8 @@
 package com.example.vladislav.androidtest.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,26 +45,28 @@ public class DetailedInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View view = inflater.inflate(R.layout.detailed_info_fragment, container, false);
+
         try {
 //            BankDetails bankOffice = savedInstanceState.getParcelable("bankOffice");
 
-            textView = (TextView) getView().findViewById(R.id.address_text_view);
+            textView = (TextView) view.findViewById(R.id.address_text_view);
             textView.setText(bankOffice.getAddress());
 
-            textView = (TextView) getView().findViewById(R.id.distance_text_view);
+            textView = (TextView) view.findViewById(R.id.distance_text_view);
             textView.setText(bankOffice.getDistance());
 
-            textView = (TextView) getView().findViewById(R.id.extra_office_text_view);
+            textView = (TextView) view.findViewById(R.id.extra_office_text_view);
             textView.setText(bankOffice.getAddress());
 
-            textView = (TextView) getView().findViewById(R.id.telephoneN_text_view);
+            textView = (TextView) view.findViewById(R.id.telephoneN_text_view);
             textView.setText(bankOffice.getPhoneNumber());
 
         } catch (NullPointerException npe) {
             Log.e("DetailedInfoFragment", "Some NPE occured!");
         }
 
-        return inflater.inflate(R.layout.fragment_detailed_info, container, false);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

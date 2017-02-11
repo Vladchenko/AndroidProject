@@ -58,7 +58,7 @@ public class BankOfficeListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final View rootView = inflater.inflate(R.layout.fragment_bank_office_list, container, false);
+        final View rootView = inflater.inflate(R.layout.bank_office_list_fragment, container, false);
 
         list = banksDetailsOperating.getBanksDetails();
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler);
