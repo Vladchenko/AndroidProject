@@ -1,14 +1,19 @@
 package com.example.vladislav.androidtest.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.vladislav.androidtest.R;
+import com.example.vladislav.androidtest.entities.BankDetails;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,52 +24,48 @@ import com.example.vladislav.androidtest.R;
  * create an instance of this fragment.
  */
 public class DetailedInfoFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private BankDetails bankOffice;
+    private TextView textView;
 
     public DetailedInfoFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DetailedInfoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DetailedInfoFragment newInstance(String param1, String param2) {
-        DetailedInfoFragment fragment = new DetailedInfoFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+            bankOffice = (BankDetails) getArguments().getParcelable("bankOffice");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
+        try {
+//            BankDetails bankOffice = savedInstanceState.getParcelable("bankOffice");
+
+            textView = (TextView) getView().findViewById(R.id.address_text_view);
+            textView.setText(bankOffice.getAddress());
+
+            textView = (TextView) getView().findViewById(R.id.distance_text_view);
+            textView.setText(bankOffice.getDistance());
+
+            textView = (TextView) getView().findViewById(R.id.extra_office_text_view);
+            textView.setText(bankOffice.getAddress());
+
+            textView = (TextView) getView().findViewById(R.id.telephoneN_text_view);
+            textView.setText(bankOffice.getPhoneNumber());
+
+        } catch (NullPointerException npe) {
+            Log.e("DetailedInfoFragment", "Some NPE occured!");
+        }
+
         return inflater.inflate(R.layout.fragment_detailed_info, container, false);
     }
 
@@ -78,12 +79,12 @@ public class DetailedInfoFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+//        if (context instanceof OnFragmentInteractionListener) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement BankOfficeCallbacks");
+//        }
     }
 
     @Override
