@@ -9,19 +9,25 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.vladislav.androidtest.activities.FragmentsActivityPortrait">
+    tools:context="com.example.vladislav.androidtest.activities.FragmentsActivity">
 
     <fragment
         android:id="@+id/fragment"
         android:name="com.example.vladislav.androidtest.fragments.BankOfficeListFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.4"
+        android:layout_weight="0.3"
         tools:layout="@layout/bank_office_list_activity" />
 
-    <RelativeLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.6" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content" />
+
+    </ScrollView>
+
 </LinearLayout>

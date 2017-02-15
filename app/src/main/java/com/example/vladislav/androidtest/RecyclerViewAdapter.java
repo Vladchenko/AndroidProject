@@ -14,7 +14,7 @@ import java.util.List;
  * Created by vladislav on 06.02.17.
  */
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder2>{
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder2> {
 
     private List<BankDetails> list;
 
@@ -42,7 +42,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if (list != null) {
+            return list.size();
+        } else {
+            return 0;
+        }
+    }
+    public void update(List list){
+        this.list=list;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder2 extends RecyclerView.ViewHolder {
@@ -55,9 +63,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public ViewHolder2(View itemView) {
             super(itemView);
-            addressTextView = (TextView)itemView.findViewById(R.id.address_text_view);
-            extraOfficeTextView = (TextView)itemView.findViewById(R.id.extra_office_text_view);
-            distanceTextView = (TextView)itemView.findViewById(R.id.distance_text_view);
+            addressTextView = (TextView) itemView.findViewById(R.id.address_text_view);
+            extraOfficeTextView = (TextView) itemView.findViewById(R.id.extra_office_text_view);
+            distanceTextView = (TextView) itemView.findViewById(R.id.distance_text_view);
             // No phone number in recycler layout
 //            telephoneNTextView = (TextView)itemView.findViewById(R.id.telephoneN_text_view);
             // No need to pass an image, it's already present in an activity.

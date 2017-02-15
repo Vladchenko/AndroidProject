@@ -9,6 +9,7 @@
 
     <!-- Component that is to be used as a container to hold a list of a banks details.
      bank_office_item is used to represent each element from a list of banks details. -->
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"

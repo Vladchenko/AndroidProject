@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:configChanges="orientation"
-    tools:context="com.example.vladislav.androidtest.activities.FragmentsActivityPortrait">
+    tools:context="com.example.vladislav.androidtest.activities.FragmentsActivity">
 
     <!--Next attr makes an activity monitor if a device orientation changed - portrait or landscape-->
     <!--android:configChanges="orientation"-->

@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class BanksDetailsOperating {
 
-    private int banksNumberDefault = 10;
+    private int banksNumberDefault = 500;
     private List<BankDetails> banksDetails;
 
     public BanksDetailsOperating() {
@@ -37,7 +37,8 @@ public class BanksDetailsOperating {
                     + "-"
                     + (int)(Math.random() * 100));
             banksDetails.get(i).setQualityControl("Прекрасно");
-            banksDetails.get(i).setWorkMode("8.00-17.00");
+            int extraHours = (int)(Math.random() * 2);
+            banksDetails.get(i).setWorkMode( extraHours + 8 + ".00-" + extraHours + 8 + 9 + ".00");
         }
 
         return banksDetails;
