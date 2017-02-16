@@ -18,8 +18,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private List<BankDetails> list;
 
-    public RecyclerViewAdapter(List<BankDetails> list) {
-        this.list = list;
+    public RecyclerViewAdapter() {
     }
 
     @Override
@@ -48,8 +47,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             return 0;
         }
     }
-    public void update(List list){
-        this.list=list;
+
+    public void update(List list) {
+        this.list = list;
         notifyDataSetChanged();
     }
 

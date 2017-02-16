@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.BundleCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -23,6 +22,7 @@ import com.example.vladislav.androidtest.RecyclerViewAdapter;
 import com.example.vladislav.androidtest.entities.BankDetails;
 import com.example.vladislav.androidtest.listeners.RecyclerItemClickListener;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,14 +30,6 @@ import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link BankOfficeCallbacks} interface
- * to handle interaction events.
- * Use the {@link BankOfficeListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class BankOfficeListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<BankDetails>> {
 
     private BankOfficeCallbacks mListener;
@@ -48,10 +40,7 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
     private ProgressBar progressBar;
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter adapter;
-    private LoaderManager loaderManager;
-    private BankOfficesLoader.BanksDataSourceCallbacks bankOfficeCallbacks;
     private List<BankDetails> list = Collections.emptyList();
-//    BanksDetailsOperating banksDetailsOperating = new BanksDetailsOperating();
 
     public BankOfficeListFragment() {
         // Required empty public constructor
@@ -65,45 +54,6 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
         } catch (Exception ex) {
             throw new ClassCastException("Activity should implement BankOfficeCallbacks");
         }
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-//        Log.d("Fragment created", "Fragment created");
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mRecyclerView.setVisibility(INVISIBLE);
-        progressBar.setVisibility(VISIBLE);
-//        task = new DownloadingTask(new DownloadingTask.BanksDataSourceCallbacks() {
-//            @Override
-//            public void onDownloadComplete(List<BankDetails> list) {
-//                adapter.update(list);
-//                BankOfficeListFragment.this.list = list;
-//                progressBar.setVisibility(GONE);
-//                mRecyclerView.setVisibility(VISIBLE);
-//                textView.setVisibility(GONE);
-//            }
-//        });
-//        task.execute();
-        Bundle bundle = new Bundle();
-        BankOfficesLoader bankDetailsLoader = new BankOfficesLoader(new BankOfficesLoader.BanksDataSourceCallbacks() {
-            @Override
-            public void onDownloadComplete(List<BankDetails> list) {
-                adapter.update(list);
-                BankOfficeListFragment.this.list = list;
-                progressBar.setVisibility(GONE);
-                mRecyclerView.setVisibility(VISIBLE);
-                textView.setVisibility(GONE);
-            }
-        }, this.getContext(), bundle);
-        loaderManager = this.getLoaderManager();
-//
-        loaderManager.initLoader(0, null, this);
     }
 
     @Override
@@ -124,16 +74,38 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
                 })
         );
 
-        adapter = new RecyclerViewAdapter(list);
-        initRecyclerView(rootView.getContext());
+        adapter = new RecyclerViewAdapter();
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setAdapter(adapter);
 
         // Inflate the layout for this fragment
         return rootView;
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+//        mRecyclerView.setVisibility(INVISIBLE);
+//        progressBar.setVisibility(VISIBLE);
+//        task = new DownloadingTask(new DownloadingTask.BanksDataSourceCallbacks() {
+//            @Override
+//            public void onDownloadComplete(List<BankDetails> list) {
+//                adapter.update(list);
+//                BankOfficeListFragment.this.list = list;
+//                progressBar.setVisibility(GONE);
+//                mRecyclerView.setVisibility(VISIBLE);
+//                textView.setVisibility(GONE);
+//            }
+//        });
+//        task.execute();
+        getLoaderManager().initLoader(0, null, this);
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        task.cancel(true);
     }
 
     @Override
@@ -143,33 +115,22 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        task.cancel(true);
-    }
-
-    void initRecyclerView(Context context) {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-        mRecyclerView.setAdapter(adapter);
-    }
-
-    @Override
     public Loader<List<BankDetails>> onCreateLoader(int id, Bundle args) {
-        return new BankOfficesLoader(bankOfficeCallbacks, this.getContext(), args);
+        return new BankOfficesLoader(getContext());
     }
 
     @Override
     public void onLoadFinished(Loader<List<BankDetails>> loader, List<BankDetails> data) {
         adapter.update(data);
-        BankOfficeListFragment.this.list = data;
+//        progressBar.setVisibility(GONE);
+//        mRecyclerView.setVisibility(VISIBLE);
+//        textView.setVisibility(GONE);
     }
 
     @Override
     public void onLoaderReset(Loader<List<BankDetails>> loader) {
-
+        adapter.update(new ArrayList());
     }
-
-
 
     public interface BankOfficeCallbacks {
         void onBankOfficeSelected(BankDetails bankOffice);
