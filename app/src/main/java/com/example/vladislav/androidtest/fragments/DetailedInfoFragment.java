@@ -124,6 +124,8 @@ public class DetailedInfoFragment extends Fragment {
         });
 
         ImageView mImageViewPhoneSet = (ImageView) view.findViewById(R.id.phoneSet_image_view);
+
+        // Clicking on a phoneset
         mImageViewPhoneSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,9 +137,13 @@ public class DetailedInfoFragment extends Fragment {
                     ActivityCompat.requestPermissions(
                             getActivity(),
                             new String[]{Manifest.permission.CALL_PHONE},
-                            Integer.parseInt("123"));
+                            1
+                    );
                 } else {
-                    startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:12345678901")));
+                    startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse(
+//                            "tel:12345678901"
+                            "tel:" +
+                            (String)((TextView)view.findViewById(R.id.telephoneN_text_view)).getText() )));
                 }
             }
         });
