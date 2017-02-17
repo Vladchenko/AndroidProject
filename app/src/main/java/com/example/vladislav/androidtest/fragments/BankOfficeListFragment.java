@@ -98,6 +98,10 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
 //            }
 //        });
 //        task.execute();
+
+        // Loading the data by force. Not a good idea.
+//        getLoaderManager().initLoader(0, null, this).forceLoad();
+
         getLoaderManager().initLoader(0, null, this);
     }
 
@@ -122,9 +126,10 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
     @Override
     public void onLoadFinished(Loader<List<BankDetails>> loader, List<BankDetails> data) {
         adapter.update(data);
-//        progressBar.setVisibility(GONE);
-//        mRecyclerView.setVisibility(VISIBLE);
-//        textView.setVisibility(GONE);
+        list = data;
+        progressBar.setVisibility(GONE);
+        mRecyclerView.setVisibility(VISIBLE);
+        textView.setVisibility(GONE);
     }
 
     @Override

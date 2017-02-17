@@ -15,6 +15,8 @@ import java.util.List;
 
 public class BankOfficesLoader extends AsyncTaskLoader<List<BankDetails>> {
 
+    List<BankDetails> list;
+
     public BankOfficesLoader(Context context) {
         super(context);
     }
@@ -22,5 +24,25 @@ public class BankOfficesLoader extends AsyncTaskLoader<List<BankDetails>> {
     @Override
     public List<BankDetails> loadInBackground() {
         return new BanksDetailsOperating().getBanksDetails();
+    }
+
+//    @Override
+//    public void deliverResult(List<BankDetails> data) {
+//        super.deliverResult(data);
+//    }
+
+    /**
+     * в этом onStartLoading() проверяешь, есть ли у тебя старый результат(просто хранишь список
+     * с твоими сущностями отделений банков и проверяешь на null). Если старый результат есть, то
+     * вызываешь deliverResult(bankOfficeList). Иначе вызываешь forceLoad()
+     */
+    @Override
+    protected void onStartLoading() {
+        super.onStartLoading();
+        if (null != list) {
+            deliverResult(list);
+        } else {
+            forceLoad();
+        }
     }
 }

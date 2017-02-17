@@ -1,15 +1,21 @@
 package com.example.vladislav.androidtest.fragments;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.vladislav.androidtest.R;
@@ -32,6 +38,7 @@ public class DetailedInfoFragment extends Fragment {
     private BankDetails bankOffice;
     private String estimationMark;
     private TextView textView;
+    private ImageView mImageViewPhoneSet;
 
     public DetailedInfoFragment() {
         // Required empty public constructor
@@ -113,6 +120,25 @@ public class DetailedInfoFragment extends Fragment {
 
                 // show it
                 alertDialog.show();
+            }
+        });
+
+        ImageView mImageViewPhoneSet = (ImageView) view.findViewById(R.id.phoneSet_image_view);
+        mImageViewPhoneSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
+//                startActivity(intent);
+                int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE);
+
+                if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(
+                            getActivity(),
+                            new String[]{Manifest.permission.CALL_PHONE},
+                            Integer.parseInt("123"));
+                } else {
+                    startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:12345678901")));
+                }
             }
         });
 
