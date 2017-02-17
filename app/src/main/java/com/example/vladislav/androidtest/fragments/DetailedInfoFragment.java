@@ -11,11 +11,13 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.vladislav.androidtest.R;
@@ -38,7 +40,7 @@ public class DetailedInfoFragment extends Fragment {
     private BankDetails bankOffice;
     private String estimationMark;
     private TextView textView;
-    private ImageView mImageViewPhoneSet;
+    private Layout mDistanceLayout;
 
     public DetailedInfoFragment() {
         // Required empty public constructor
@@ -108,7 +110,7 @@ public class DetailedInfoFragment extends Fragment {
                         .setSingleChoiceItems(estimationGroup, -1, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int item) {
                                 dialog.dismiss();// dismiss the alertbox after chose option
-                                estimationMark = (String)estimationGroup[item];
+                                estimationMark = (String) estimationGroup[item];
 //                                intent.putExtra("estimationMark",estimationMark);
 //                                setResult(RESULT_OK, intent);
                                 mListener.onEstimatingBank(estimationMark);
@@ -125,7 +127,7 @@ public class DetailedInfoFragment extends Fragment {
 
         ImageView mImageViewPhoneSet = (ImageView) view.findViewById(R.id.phoneSet_image_view);
 
-        // Clicking on a phoneset
+        // Clicking on a phoneset and making a call
         mImageViewPhoneSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,8 +145,25 @@ public class DetailedInfoFragment extends Fragment {
                     startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse(
 //                            "tel:12345678901"
                             "tel:" +
-                            (String)((TextView)view.findViewById(R.id.telephoneN_text_view)).getText() )));
+                                    (String) ((TextView) view.findViewById(R.id.telephoneN_text_view)).getText())));
                 }
+            }
+        });
+
+        RelativeLayout mDistanceLayout = (RelativeLayout) view.findViewById(R.id.directionDistance);
+        mDistanceLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create a Uri from an intent string. Use the result to create an Intent.
+                Uri gmmIntentUri = Uri.parse("google.streetview:cbll=46.414382,10.013988");
+
+                // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                // Make the Intent explicit by setting the Google Maps package
+                mapIntent.setPackage("com.google.android.apps.maps");
+
+                // Attempt to start an activity that can handle the Intent
+                startActivity(mapIntent);
             }
         });
 
