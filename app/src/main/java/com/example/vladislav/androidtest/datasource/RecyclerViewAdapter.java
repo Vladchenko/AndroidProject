@@ -1,4 +1,4 @@
-package com.example.vladislav.androidtest;
+package com.example.vladislav.androidtest.datasource;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,7 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.vladislav.androidtest.entities.BankDetails;
+import com.example.vladislav.androidtest.R;
+import com.example.vladislav.androidtest.beans.BankDetails;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder2> {
 
-    private List<BankDetails> list;
+    private List<BankDetails> mList;
 
     public RecyclerViewAdapter() {
     }
@@ -31,7 +32,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder2 holder, int position) {
-        BankDetails bankDetails = list.get(position);
+        BankDetails bankDetails = mList.get(position);
         holder.addressTextView.setText(bankDetails.getAddress());
         holder.distanceTextView.setText(bankDetails.getDistance());
         holder.extraOfficeTextView.setText(bankDetails.getName());
@@ -41,15 +42,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        if (list != null) {
-            return list.size();
+        if (mList != null) {
+            return mList.size();
         } else {
             return 0;
         }
     }
 
     public void update(List list) {
-        this.list = list;
+        this.mList = list;
         notifyDataSetChanged();
     }
 
@@ -66,7 +67,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             addressTextView = (TextView) itemView.findViewById(R.id.address_text_view);
             extraOfficeTextView = (TextView) itemView.findViewById(R.id.extra_office_text_view);
             distanceTextView = (TextView) itemView.findViewById(R.id.distance_text_view);
-            // No phone number in recycler layout
 //            telephoneNTextView = (TextView)itemView.findViewById(R.id.telephoneN_text_view);
             // No need to pass an image, it's already present in an activity.
         }

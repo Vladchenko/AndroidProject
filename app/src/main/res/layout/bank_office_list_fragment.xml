@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.vladislav.androidtest.fragments.BankOfficeListFragment">
+    tools:context="com.example.vladislav.androidtest.BanksOfficesList.BankOfficeListFragment">
 
     <!-- The contents of this fragment is copied from a
         bank_office_list_activity.xml layout -->
@@ -18,19 +18,19 @@
 
     <ProgressBar
         style="?android:attr/progressBarStyleLarge"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/progress_bar_size"
+        android:layout_height="@dimen/progress_bar_size"
         android:id="@+id/progressBar"
         android:layout_centerInParent="true"
         android:visibility="visible"/>
 
     <TextView
-        android:text="Please wait, list of banks is downloading now ..."
+        android:text="@string/progress_bar_inscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
         android:layout_alignBottom="@+id/progressBar"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="@dimen/progress_margin_bottom"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.example.vladislav.androidtest.listeners;
+package com.example.vladislav.androidtest.BanksOfficesList;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,13 +11,13 @@ import android.view.View;
  */
 
 public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
+
     private OnItemClickListener mListener;
+    private GestureDetector mGestureDetector;
 
     public interface OnItemClickListener {
         public void onItemClick(View view, int position);
     }
-
-    GestureDetector mGestureDetector;
 
     public RecyclerItemClickListener(Context context, OnItemClickListener listener) {
         mListener = listener;

@@ -6,21 +6,6 @@
     android:clickable="true"
     android:background="@drawable/item_selector">
 
-    <ImageView
-        android:id="@+id/house_image_view"
-        android:layout_width="@dimen/house_size"
-        android:layout_height="@dimen/house_size"
-        android:layout_marginLeft="@dimen/house_left_margin"
-        android:layout_marginRight="@dimen/house_right_margin"
-        android:layout_marginTop="@dimen/house_up_margin"
-        android:background="@drawable/ic_brightness_1_black_24dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:contentDescription="Circle with a house in a center of it"
-        android:scaleType="center"
-        app:srcCompat="@drawable/ic_home_black_24dp"
-        android:tint="@android:color/background_light"
-         />
-
     <TextView
         android:id="@+id/address_text_view"
         android:layout_width="wrap_content"

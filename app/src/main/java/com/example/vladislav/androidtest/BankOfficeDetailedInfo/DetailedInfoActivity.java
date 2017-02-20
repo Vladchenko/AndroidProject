@@ -1,4 +1,4 @@
-package com.example.vladislav.androidtest.activities;
+package com.example.vladislav.androidtest.BankOfficeDetailedInfo;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,59 +7,63 @@ import android.os.Parcelable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.vladislav.androidtest.R;
-import com.example.vladislav.androidtest.entities.BankDetails;
+import com.example.vladislav.androidtest.beans.BankDetails;
 
 public class DetailedInfoActivity extends AppCompatActivity {
 
     public static final String EXTRA_BANK = "com.example.vladislav.androidtest.EXTRA_BANK";
 
-    private String temp;
-    private TextView textView;
-    private Button button;
-    private final Context context = this;
-    private CharSequence[] estimationGroup = {"1", "2", "3", "4", "5"};
-    private String estimationMark;
+    private String mTemp;
+    private TextView mTextView;
+    private Button mButton;
+    private final Context mContext = this;
+    private CharSequence[] mEstimationGroup = {"1", "2", "3", "4", "5"};
+    private String mEstimationMark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+
         setContentView(R.layout.detailed_info_activity);
         Intent intent = getIntent();
         Parcelable extraBank = (Parcelable) intent.getParcelableExtra(EXTRA_BANK);
 
-        temp = ((BankDetails) extraBank).getAddress();
-        textView = (TextView) findViewById(R.id.address_text_view);
-        textView.setText(temp);
+        mTemp = ((BankDetails) extraBank).getAddress();
+        mTextView = (TextView) findViewById(R.id.address_text_view);
+        mTextView.setText(mTemp);
 
-        temp = ((BankDetails) extraBank).getDistance();
-        textView = (TextView) findViewById(R.id.distance_text_view);
-        textView.setText(temp);
+        mTemp = ((BankDetails) extraBank).getDistance();
+        mTextView = (TextView) findViewById(R.id.distance_text_view);
+        mTextView.setText(mTemp);
 
-        temp = ((BankDetails) extraBank).getName();
-        textView = (TextView) findViewById(R.id.extra_office_text_view);
-        textView.setText(temp);
+        mTemp = ((BankDetails) extraBank).getName();
+        mTextView = (TextView) findViewById(R.id.extra_office_text_view);
+        mTextView.setText(mTemp);
 
-        temp = ((BankDetails) extraBank).getPhoneNumber();
-        textView = (TextView) findViewById(R.id.telephoneN_text_view);
-        textView.setText(temp);
+        mTemp = ((BankDetails) extraBank).getPhoneNumber();
+        mTextView = (TextView) findViewById(R.id.telephoneN_text_view);
+        mTextView.setText(mTemp);
 
-        button = (Button) findViewById(R.id.qualityEstimation_button);
+        mButton = (Button) findViewById(R.id.qualityEstimation_button);
 
-        // add button listener
-        button.setOnClickListener(new View.OnClickListener() {
+        // add mButton listener
+        mButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        context);
+                        mContext);
 
                 // set title
                 alertDialogBuilder.setTitle("Пожалуйста оцените качество, работы нашего филиала.");
@@ -70,24 +74,24 @@ public class DetailedInfoActivity extends AppCompatActivity {
                         .setCancelable(true)
 //                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 //                            public void onClick(DialogInterface dialog, int id) {
-//                                // if this button is clicked, close
+//                                // if this mButton is clicked, close
 //                                // current activity
 //                                DetailedInfoActivity.this.finish();
 //                            }
 //                        })
 //                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
 //                            public void onClick(DialogInterface dialog, int id) {
-//                                // if this button is clicked, just close
+//                                // if this mButton is clicked, just close
 //                                // the dialog box and do nothing
 //                                dialog.cancel();
 //                            }
 //                        })
-                        .setSingleChoiceItems(estimationGroup, -1, new DialogInterface.OnClickListener() {
+                        .setSingleChoiceItems(mEstimationGroup, -1, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int item) {
                                 dialog.dismiss();// dismiss the alertbox after chose option
                                 Intent intent = new Intent();
-                                estimationMark = (String)estimationGroup[item];
-                                intent.putExtra("estimationMark",estimationMark);
+                                mEstimationMark = (String) mEstimationGroup[item];
+                                intent.putExtra("mEstimationMark", mEstimationMark);
                                 setResult(RESULT_OK, intent);
                             }
                         });
@@ -99,6 +103,8 @@ public class DetailedInfoActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
+
+        return getWindow().getDecorView().getRootView();
 
     }
 

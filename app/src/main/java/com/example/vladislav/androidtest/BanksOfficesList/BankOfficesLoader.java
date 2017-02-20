@@ -1,11 +1,10 @@
-package com.example.vladislav.androidtest;
+package com.example.vladislav.androidtest.BanksOfficesList;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.Loader;
 
-import com.example.vladislav.androidtest.entities.BankDetails;
+import com.example.vladislav.androidtest.datasource.BanksDetailsOperating;
+import com.example.vladislav.androidtest.beans.BankDetails;
 
 import java.util.List;
 
@@ -15,21 +14,11 @@ import java.util.List;
 
 public class BankOfficesLoader extends AsyncTaskLoader<List<BankDetails>> {
 
-    List<BankDetails> list;
+    List<BankDetails> mList;
 
     public BankOfficesLoader(Context context) {
         super(context);
     }
-
-    @Override
-    public List<BankDetails> loadInBackground() {
-        return new BanksDetailsOperating().getBanksDetails();
-    }
-
-//    @Override
-//    public void deliverResult(List<BankDetails> data) {
-//        super.deliverResult(data);
-//    }
 
     /**
      * в этом onStartLoading() проверяешь, есть ли у тебя старый результат(просто хранишь список
@@ -39,10 +28,16 @@ public class BankOfficesLoader extends AsyncTaskLoader<List<BankDetails>> {
     @Override
     protected void onStartLoading() {
         super.onStartLoading();
-        if (null != list) {
-            deliverResult(list);
+        if (null != mList) {
+            deliverResult(mList);
         } else {
             forceLoad();
         }
     }
+
+    @Override
+    public List<BankDetails> loadInBackground() {
+        return new BanksDetailsOperating().getmBanksDetails();
+    }
+
 }

@@ -1,32 +1,24 @@
-package com.example.vladislav.androidtest.activities;
+package com.example.vladislav.androidtest;
 
 
-import android.app.Activity;
 import android.content.res.Configuration;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.LoaderManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.example.vladislav.androidtest.R;
-import com.example.vladislav.androidtest.entities.BankDetails;
-import com.example.vladislav.androidtest.fragments.BankOfficeListFragment;
-import com.example.vladislav.androidtest.fragments.BankOfficeListFragment.BankOfficeCallbacks;
-import com.example.vladislav.androidtest.fragments.DetailedInfoFragment;
-
-import java.util.List;
+import com.example.vladislav.androidtest.beans.BankDetails;
+import com.example.vladislav.androidtest.BanksOfficesList.BankOfficeListFragment;
+import com.example.vladislav.androidtest.BanksOfficesList.BankOfficeListFragment.BankOfficeCallbacks;
+import com.example.vladislav.androidtest.BankOfficeDetailedInfo.DetailedInfoFragment;
 
 public class FragmentsActivity extends AppCompatActivity implements BankOfficeCallbacks,
         DetailedInfoFragment.OnFragmentInteractionListener {
 
-//    BankOfficeLoaderCallbacks<List<BankDetails>>
-
-    private FragmentManager fragmentManager;
-    private String estimationMark;
+    private FragmentManager mFragmentManager;
+    private String mEstimationMark;
 
 //    DetailedInfoFragment.OnDataPass dataPasser;
 
@@ -35,9 +27,9 @@ public class FragmentsActivity extends AppCompatActivity implements BankOfficeCa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragments_activity);
 
-        fragmentManager = getSupportFragmentManager();
-        if (fragmentManager.findFragmentByTag("bank_office_list_tag") == null) {
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
+        mFragmentManager = getSupportFragmentManager();
+        if (mFragmentManager.findFragmentByTag("bank_office_list_tag") == null) {
+            FragmentTransaction transaction = mFragmentManager.beginTransaction();
             transaction.addToBackStack(null);
             transaction.add(R.id.fragment_container, new BankOfficeListFragment(), "bank_office_list_tag").commit();
         }
@@ -60,6 +52,10 @@ public class FragmentsActivity extends AppCompatActivity implements BankOfficeCa
 //        }
 //    }
 
+    /**
+     * Method is launched when a bank's office list's element selected.
+     * bankOffice bean is put into a bundle and passed into a fragment container.
+     **/
     @Override
     public void onBankOfficeSelected(BankDetails bankOffice) {
 // TODO: fragmentTransaction replace
@@ -70,8 +66,8 @@ public class FragmentsActivity extends AppCompatActivity implements BankOfficeCa
         bundle.putParcelable("bankOffice", bankOffice);
         fragment.setArguments(bundle);
 
-        fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        mFragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             // If the screen is now in portrait mode, we can show the
@@ -83,20 +79,36 @@ public class FragmentsActivity extends AppCompatActivity implements BankOfficeCa
 
     }
 
+    /**
+     * When providing a feedback on a bank's office work, we put a received estimation mark and put
+     * it to a field of this class.
+     * @param estimationMark
+     */
     @Override
     public void onEstimatingBank(String estimationMark) {
-        this.estimationMark = estimationMark;
-
+        this.mEstimationMark = estimationMark;
     }
 
-//    This method fires, when user clicks "back" on a previous activity.
+    // DOESN'T WORK WHEN turning to a landscape.
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+            System.out.println(getFragmentManager().getBackStackEntryAt(0).getName());
+        }
+        System.out.println("1");
+    }
+
+    /**
+     * This method fires, when user clicks "back" on a previous activity.
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if (estimationMark != null) {
+        if (mEstimationMark != null) {
             Toast.makeText(getApplicationContext(),
-                    "Вы дали оценку " + estimationMark, Toast.LENGTH_SHORT).show();
-            estimationMark = null;
+                    "Вы дали оценку " + mEstimationMark, Toast.LENGTH_SHORT).show();
+            mEstimationMark = null;
         }
     }
 

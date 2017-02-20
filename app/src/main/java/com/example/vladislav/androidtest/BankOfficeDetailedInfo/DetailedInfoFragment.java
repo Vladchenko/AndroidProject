@@ -1,4 +1,4 @@
-package com.example.vladislav.androidtest.fragments;
+package com.example.vladislav.androidtest.BankOfficeDetailedInfo;
 
 import android.Manifest;
 import android.app.Activity;
@@ -7,11 +7,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.vladislav.androidtest.R;
-import com.example.vladislav.androidtest.entities.BankDetails;
-
-import static android.app.Activity.RESULT_OK;
+import com.example.vladislav.androidtest.beans.BankDetails;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,12 +33,27 @@ import static android.app.Activity.RESULT_OK;
  */
 public class DetailedInfoFragment extends Fragment {
 
-    private CharSequence[] estimationGroup = {"1", "2", "3", "4", "5"};
+    private CharSequence[] mEstimationGroup = {"1", "2", "3", "4", "5"};
     private OnFragmentInteractionListener mListener;
-    private BankDetails bankOffice;
-    private String estimationMark;
-    private TextView textView;
-    private Layout mDistanceLayout;
+    private BankDetails mBankDetails;
+    private String mEstimationMark;
+    private TextView mTextView;
+//    private Layout mDistanceLayout;
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        public void onEstimatingBank(String estimationMark);
+    }
 
     public DetailedInfoFragment() {
         // Required empty public constructor
@@ -52,28 +65,53 @@ public class DetailedInfoFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
 
-            bankOffice = (BankDetails) getArguments().getParcelable("bankOffice");
+            mBankDetails = (BankDetails) getArguments().getParcelable("bankOffice");
         }
 
     }
 
+    // Remove this method, if further operating is doing fine there.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         final View view = inflater.inflate(R.layout.detailed_info_fragment, container, false);
+        return view;
+    }
 
-        textView = (TextView) view.findViewById(R.id.address_text_view);
-        textView.setText(bankOffice.getAddress());
+    // TODO: Rename method, update argument and hook method into UI event
+//    public void onButtonPressed(Uri uri) {
+//        if (mListener != null) {
+//            mListener.onFragmentInteraction(uri);
+//        }
+//    }
 
-        textView = (TextView) view.findViewById(R.id.distance_text_view);
-        textView.setText(bankOffice.getDistance());
+    @Override
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        textView = (TextView) view.findViewById(R.id.extra_office_text_view);
-        textView.setText(bankOffice.getAddress());
+        mTextView = (TextView) view.findViewById(R.id.address_text_view);
+        mTextView.setText(mBankDetails.getAddress());
 
-        textView = (TextView) view.findViewById(R.id.telephoneN_text_view);
-        textView.setText(bankOffice.getPhoneNumber());
+        mTextView = (TextView) view.findViewById(R.id.distance_text_view);
+        mTextView.setText(mBankDetails.getDistance());
+
+        mTextView = (TextView) view.findViewById(R.id.extra_office_text_view);
+        mTextView.setText(mBankDetails.getName());
+
+        mTextView = (TextView) view.findViewById(R.id.telephoneN_text_view);
+        mTextView.setText(mBankDetails.getPhoneNumber());
+
+
+        mTextView = (TextView) view.findViewById(R.id.monday_hours_text_view);
+        mTextView.setText(mBankDetails.getWorkingHours());
+        mTextView = (TextView) view.findViewById(R.id.tuesday_hours_text_view);
+        mTextView.setText(mBankDetails.getWorkingHours());
+        mTextView = (TextView) view.findViewById(R.id.wednesday_hours_text_view);
+        mTextView.setText(mBankDetails.getWorkingHours());
+        mTextView = (TextView) view.findViewById(R.id.thursday_hours_text_view);
+        mTextView.setText(mBankDetails.getWorkingHours());
+        mTextView = (TextView) view.findViewById(R.id.friday_hours_text_view);
+        mTextView.setText(mBankDetails.getWorkingHours());
 
         Button button = (Button) view.findViewById(R.id.qualityEstimation_button);
 
@@ -107,13 +145,13 @@ public class DetailedInfoFragment extends Fragment {
 //                                dialog.cancel();
 //                            }
 //                        })
-                        .setSingleChoiceItems(estimationGroup, -1, new DialogInterface.OnClickListener() {
+                        .setSingleChoiceItems(mEstimationGroup, -1, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int item) {
                                 dialog.dismiss();// dismiss the alertbox after chose option
-                                estimationMark = (String) estimationGroup[item];
-//                                intent.putExtra("estimationMark",estimationMark);
+                                mEstimationMark = (String) mEstimationGroup[item];
+//                                intent.putExtra("mEstimationMark",mEstimationMark);
 //                                setResult(RESULT_OK, intent);
-                                mListener.onEstimatingBank(estimationMark);
+                                mListener.onEstimatingBank(mEstimationMark);
                             }
                         });
 
@@ -126,7 +164,6 @@ public class DetailedInfoFragment extends Fragment {
         });
 
         ImageView mImageViewPhoneSet = (ImageView) view.findViewById(R.id.phoneSet_image_view);
-
         // Clicking on a phoneset and making a call
         mImageViewPhoneSet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,6 +188,7 @@ public class DetailedInfoFragment extends Fragment {
         });
 
         RelativeLayout mDistanceLayout = (RelativeLayout) view.findViewById(R.id.directionDistance);
+        // Clicking on a distance layout and launching a google maps app.
         mDistanceLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,16 +204,7 @@ public class DetailedInfoFragment extends Fragment {
                 startActivity(mapIntent);
             }
         });
-
-        return view;
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -192,22 +221,6 @@ public class DetailedInfoFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onEstimatingBank(String estimationMark);
-
     }
 
 }

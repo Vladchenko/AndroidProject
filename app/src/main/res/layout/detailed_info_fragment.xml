@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.vladislav.androidtest.fragments.DetailedInfoFragment"
+    tools:context="com.example.vladislav.androidtest.BankOfficeDetailedInfo.DetailedInfoFragment"
     android:orientation="vertical">
 
     <!-- The contents of this fragment is copied from a

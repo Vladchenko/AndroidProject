@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_fragments"
     android:layout_width="match_parent"
@@ -9,19 +9,28 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.vladislav.androidtest.activities.FragmentsActivity">
+    tools:context="com.example.vladislav.androidtest.FragmentsActivity">
 
-    <fragment
-        android:id="@+id/fragment"
-        android:name="com.example.vladislav.androidtest.fragments.BankOfficeListFragment"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.3"
-        tools:layout="@layout/bank_office_list_activity" />
+        android:background="@drawable/border">
+
+        <fragment
+            android:id="@+id/fragment"
+            android:name="com.example.vladislav.androidtest.BanksOfficesList.BankOfficeListFragment"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/border"
+            tools:layout="@layout/bank_office_list_activity" />
+    </LinearLayout>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/border">
 
         <RelativeLayout
             android:id="@+id/fragment_container"
@@ -30,4 +39,4 @@
 
     </ScrollView>
 
-</LinearLayout>
+</RelativeLayout>

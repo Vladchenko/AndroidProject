@@ -1,4 +1,4 @@
-package com.example.vladislav.androidtest.entities;
+package com.example.vladislav.androidtest.beans;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -14,7 +14,7 @@ public class BankDetails implements Parcelable {
     private String name; // extra office
     private String latitude;
     private String longtitude;
-    private String workMode;
+    private String workingHours;
     private String phoneNumber;
     private String qualityControl;
 
@@ -24,7 +24,7 @@ public class BankDetails implements Parcelable {
         setLatitude(in.readString());
         setLongtitude(in.readString());
         setDistance(in.readString());
-        setWorkMode(in.readString());
+        setWorkingHours(in.readString());
         setPhoneNumber(in.readString());
         setQualityControl(in.readString());
     }
@@ -57,7 +57,7 @@ public class BankDetails implements Parcelable {
         dest.writeString(getLatitude());
         dest.writeString(getLongtitude());
         dest.writeString(getDistance());
-        dest.writeString(getWorkMode());
+        dest.writeString(getWorkingHours());
         dest.writeString(getPhoneNumber());
         dest.writeString(getQualityControl());
     }
@@ -94,12 +94,12 @@ public class BankDetails implements Parcelable {
         this.longtitude = longtitude;
     }
 
-    public String getWorkMode() {
-        return workMode;
+    public String getWorkingHours() {
+        return workingHours;
     }
 
-    public void setWorkMode(String workMode) {
-        this.workMode = workMode;
+    public void setWorkingHours(String workingHours) {
+        this.workingHours = workingHours;
     }
 
     public String getPhoneNumber() {
