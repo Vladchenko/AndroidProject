@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -59,13 +60,21 @@ public class DetailedInfoFragment extends Fragment {
         // Required empty public constructor
     }
 
+/*
+    public static DetailedInfoFragment newInstance(Parcelable parcelable) {
+        Bundle args = new Bundle();
+        args.putParcelable("bankOffice",parcelable);
+        DetailedInfoFragment fragment = new DetailedInfoFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+*/
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
-            mBankDetails = (BankDetails) getArguments().getParcelable("bankOffice");
+            mBankDetails = getArguments().getParcelable("bankOffice");
         }
 
     }

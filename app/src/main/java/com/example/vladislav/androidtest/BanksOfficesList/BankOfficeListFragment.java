@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.vladislav.androidtest.datasource.DownloadingTask;
@@ -60,9 +61,9 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
         mProgressBar = (ProgressBar) mRootView.findViewById(R.id.progressBar);
         mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler);
         mTextView = (TextView) mRootView.findViewById(R.id.textView);
-
         mRecyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(mRootView.getContext(), new RecyclerItemClickListener.OnItemClickListener() {
+                new RecyclerItemClickListener(mRootView.getContext(),
+                        new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
                         mListener.onBankOfficeSelected(mList.get(position));
@@ -74,6 +75,7 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
 
+
         // Inflate the layout for this fragment
         return mRootView;
     }
@@ -81,8 +83,9 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        mRecyclerView.setVisibility(INVISIBLE);
-//        mProgressBar.setVisibility(VISIBLE);
+        mRecyclerView.setVisibility(GONE);
+        mProgressBar.setVisibility(VISIBLE);
+        mTextView.setVisibility(VISIBLE);
 //        task = new DownloadingTask(new DownloadingTask.BanksDataSourceCallbacks() {
 //            @Override
 //            public void onDownloadComplete(List<BankDetails> mList) {
@@ -98,7 +101,6 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
         // Loading the data by force. In this case, loading is done every time an activity created.
         // But we need it to load only once.
 //        getLoaderManager().initLoader(0, null, this).forceLoad();
-
         getLoaderManager().initLoader(0, null, this);
     }
 
@@ -132,7 +134,7 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
 
     @Override
     public void onLoaderReset(Loader<List<BankDetails>> loader) {
-        mAdapter.update(new ArrayList());
+        mAdapter.update(new ArrayList()); // mList seems perform good here, why not use it ?
     }
 
     public interface BankOfficeCallbacks {

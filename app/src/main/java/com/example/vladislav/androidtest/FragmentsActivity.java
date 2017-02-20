@@ -5,8 +5,12 @@ import android.content.res.Configuration;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vladislav.androidtest.beans.BankDetails;
@@ -19,13 +23,17 @@ public class FragmentsActivity extends AppCompatActivity implements BankOfficeCa
 
     private FragmentManager mFragmentManager;
     private String mEstimationMark;
-
+    private TextView emptyTextView;
 //    DetailedInfoFragment.OnDataPass dataPasser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragments_activity);
+
+
+        emptyTextView = (TextView) findViewById(R.id.emptyText);
+
 
         mFragmentManager = getSupportFragmentManager();
         if (mFragmentManager.findFragmentByTag("bank_office_list_tag") == null) {
@@ -66,7 +74,6 @@ public class FragmentsActivity extends AppCompatActivity implements BankOfficeCa
         bundle.putParcelable("bankOffice", bankOffice);
         fragment.setArguments(bundle);
 
-        mFragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
@@ -74,8 +81,16 @@ public class FragmentsActivity extends AppCompatActivity implements BankOfficeCa
             // dialog in-line with the list so we don't need this activity.
 //            Toast.makeText(this, "Landscape mode entered", Toast.LENGTH_SHORT).show();
             transaction.addToBackStack(null);
+            if(mFragmentManager.getBackStackEntryCount() > 2) {
+                mFragmentManager.popBackStack(); // remove one (you can also remove more)
+            }
+            transaction.replace(R.id.fragment_container, fragment).commit();
+        } else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            emptyTextView.setVisibility(View.GONE);
+//            transaction.addToBackStack("teststack");
+            transaction.replace(R.id.rightContainer, fragment).commit();
         }
-        transaction.replace(R.id.fragment_container, fragment).commit();
+
 
     }
 
@@ -89,14 +104,14 @@ public class FragmentsActivity extends AppCompatActivity implements BankOfficeCa
         this.mEstimationMark = estimationMark;
     }
 
-    // DOESN'T WORK WHEN turning to a landscape.
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+       // mFragmentManager.popBackStack("teststack", FragmentManager.POP_BACK_STACK_INCLUSIVE);
         if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+            emptyTextView.setVisibility(View.GONE);
             System.out.println(getFragmentManager().getBackStackEntryAt(0).getName());
         }
-        System.out.println("1");
     }
 
     /**
@@ -105,6 +120,12 @@ public class FragmentsActivity extends AppCompatActivity implements BankOfficeCa
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
+        int count = mFragmentManager.getBackStackEntryCount();
+//        if (count == 0){
+//            finish();
+//        }
+
         if (mEstimationMark != null) {
             Toast.makeText(getApplicationContext(),
                     "Вы дали оценку " + mEstimationMark, Toast.LENGTH_SHORT).show();

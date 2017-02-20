@@ -12,8 +12,8 @@ import java.util.List;
 public class BanksDetailsOperating {
 
     private int mBanksNumberDefault = 500;
-    private int banksNumber = 10;
-    private int temp;
+    private int mBanksNumber = 10;
+    private int mTemp;
     private List<BankDetails> mBanksDetails;
 
     public BanksDetailsOperating() {
@@ -30,8 +30,8 @@ public class BanksDetailsOperating {
             banksDetails.get(i).setLatitude((int) (Math.random() * 100) + "." + (int) (Math.random() * 10000));
             banksDetails.get(i).setLongtitude((int) (Math.random() * 100) + "." + (int) (Math.random() * 10000));
             banksDetails.get(i).setDistance((int) (Math.random() * 20) + "." + (int) (Math.random() * 100) + " км.");
-            temp = (int) (Math.random() * banksNumber);
-            switch (temp) {
+            mTemp = (int) (Math.random() * mBanksNumber);
+            switch (mTemp) {
                 case 0:{
                     banksDetails.get(i).setName("Банк Авангард");
                     break;
