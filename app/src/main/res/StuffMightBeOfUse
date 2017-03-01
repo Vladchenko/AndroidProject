@@ -13,3 +13,8 @@ android:background="@drawable/ic_brightness_1_black_24dp"
 android:tint="@android:color/background_light"
 
 android:src="@drawable/ic_home_black_24dp"
+
+
+
+
+android:configChanges="orientation|screenSize"

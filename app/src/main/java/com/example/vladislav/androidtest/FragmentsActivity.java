@@ -24,51 +24,33 @@ public class FragmentsActivity extends AppCompatActivity implements BankOfficeCa
     private FragmentManager mFragmentManager;
     private String mEstimationMark;
     private TextView emptyTextView;
-//    DetailedInfoFragment.OnDataPass dataPasser;
+    Fragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragments_activity);
 
-
-        emptyTextView = (TextView) findViewById(R.id.emptyText);
-
-
+        emptyTextView = (TextView) findViewById(R.id.empty_bank_details_text_view);
         mFragmentManager = getSupportFragmentManager();
+
         if (mFragmentManager.findFragmentByTag("bank_office_list_tag") == null) {
             FragmentTransaction transaction = mFragmentManager.beginTransaction();
             transaction.addToBackStack(null);
             transaction.add(R.id.fragment_container, new BankOfficeListFragment(), "bank_office_list_tag").commit();
         }
 
-        // Shows a small window with some info
-//        Toast.makeText(this, "BankOfficeListActivity", Toast.LENGTH_SHORT).show();
-//        Log.d("Activity created","Activity created");
     }
 
-//    @Override
-//    public void onConfigurationChanged(Configuration newConfig) {
-//        super.onConfigurationChanged(newConfig);
-//
-//        System.out.println("!");
-//        // Checks the orientation of the screen
-//        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
-//        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-//            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
     /**
-     * Method is launched when a bank's office list's element selected.
+     * Method is invoked when a bank's office list's element selected.
      * bankOffice bean is put into a bundle and passed into a fragment container.
      **/
     @Override
     public void onBankOfficeSelected(BankDetails bankOffice) {
 // TODO: fragmentTransaction replace
 
-        Fragment fragment = new DetailedInfoFragment();
+        fragment = new DetailedInfoFragment();
 
         Bundle bundle = new Bundle();
         bundle.putParcelable("bankOffice", bankOffice);
@@ -81,37 +63,27 @@ public class FragmentsActivity extends AppCompatActivity implements BankOfficeCa
             // dialog in-line with the list so we don't need this activity.
 //            Toast.makeText(this, "Landscape mode entered", Toast.LENGTH_SHORT).show();
             transaction.addToBackStack(null);
-            if(mFragmentManager.getBackStackEntryCount() > 2) {
+            if (mFragmentManager.getBackStackEntryCount() > 2) {
                 mFragmentManager.popBackStack(); // remove one (you can also remove more)
             }
             transaction.replace(R.id.fragment_container, fragment).commit();
-        } else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+        } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             emptyTextView.setVisibility(View.GONE);
 //            transaction.addToBackStack("teststack");
-            transaction.replace(R.id.rightContainer, fragment).commit();
+            transaction.replace(R.id.bank_details_container, fragment).commit();
         }
-
 
     }
 
     /**
      * When providing a feedback on a bank's office work, we put a received estimation mark and put
      * it to a field of this class.
+     *
      * @param estimationMark
      */
     @Override
     public void onEstimatingBank(String estimationMark) {
         this.mEstimationMark = estimationMark;
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-       // mFragmentManager.popBackStack("teststack", FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
-            emptyTextView.setVisibility(View.GONE);
-            System.out.println(getFragmentManager().getBackStackEntryAt(0).getName());
-        }
     }
 
     /**
@@ -122,15 +94,16 @@ public class FragmentsActivity extends AppCompatActivity implements BankOfficeCa
         super.onBackPressed();
 
         int count = mFragmentManager.getBackStackEntryCount();
-//        if (count == 0){
-//            finish();
-//        }
+        if (count == 0) {
+            finish();
+        }
 
         if (mEstimationMark != null) {
             Toast.makeText(getApplicationContext(),
                     "Вы дали оценку " + mEstimationMark, Toast.LENGTH_SHORT).show();
             mEstimationMark = null;
         }
+
     }
 
 }

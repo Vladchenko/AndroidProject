@@ -30,7 +30,7 @@
     </LinearLayout>
 
         <FrameLayout
-            android:id="@+id/rightContainer"
+            android:id="@+id/bank_details_container"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -38,7 +38,7 @@
             android:background="@drawable/border">
 
             <TextView
-                android:id="@+id/emptyText"
+                android:id="@+id/empty_bank_details_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

@@ -332,8 +332,8 @@
 
         <ImageView
             android:id="@+id/phoneSet"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/phoneset_size"
+            android:layout_height="@dimen/phoneset_size"
             android:layout_gravity="center"
             android:layout_weight="1.2"
             app:srcCompat="@drawable/ic_phone_black_24dp"

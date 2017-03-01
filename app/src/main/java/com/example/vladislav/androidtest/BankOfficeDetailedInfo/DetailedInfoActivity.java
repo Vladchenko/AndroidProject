@@ -36,6 +36,7 @@ public class DetailedInfoActivity extends AppCompatActivity {
 
         setContentView(R.layout.detailed_info_activity);
         Intent intent = getIntent();
+        // Getting a detailed bank info from an intent got from a FragmentsActivity.
         Parcelable extraBank = (Parcelable) intent.getParcelableExtra(EXTRA_BANK);
 
         mTemp = ((BankDetails) extraBank).getAddress();
@@ -70,22 +71,7 @@ public class DetailedInfoActivity extends AppCompatActivity {
 
                 // set dialog message
                 alertDialogBuilder
-//                        .setMessage("Click yes to exit!")
                         .setCancelable(true)
-//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int id) {
-//                                // if this mButton is clicked, close
-//                                // current activity
-//                                DetailedInfoActivity.this.finish();
-//                            }
-//                        })
-//                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int id) {
-//                                // if this mButton is clicked, just close
-//                                // the dialog box and do nothing
-//                                dialog.cancel();
-//                            }
-//                        })
                         .setSingleChoiceItems(mEstimationGroup, -1, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int item) {
                                 dialog.dismiss();// dismiss the alertbox after chose option
