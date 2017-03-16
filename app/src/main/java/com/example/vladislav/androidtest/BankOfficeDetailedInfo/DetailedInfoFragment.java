@@ -47,12 +47,10 @@ public class DetailedInfoFragment extends Fragment {
     private BankDetails mBankDetails;
     private String mEstimationMark;
     private TextView mTextView;
-    //    private Layout mDistanceLayout;
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private DBHelper mDbHelper;
     private Cursor mCursor = null;
-    private int mBankListIndex;
 
     /**
      * This interface must be implemented by activities that contain this
@@ -146,7 +144,7 @@ public class DetailedInfoFragment extends Fragment {
                                 mEstimationMark = (String) mEstimationGroup[item];
                                 mEditor = mSharedPreferences.edit();
                                 mEditor.putInt(Consts.ESTIMATION_MARK + mBankDetails.getmID(), Integer.parseInt(mEstimationMark));
-//                                System.out.println(Consts.ESTIMATION_MARK+mBankDetails.getmID() + ":" + mEstimationMark);
+                                System.out.println(Consts.ESTIMATION_MARK+mBankDetails.getmID() + ":" + mEstimationMark);
                                 mEditor.commit();
                                 mListener.onEstimatingBank(mEstimationMark);
                             }

@@ -17,10 +17,6 @@ import java.util.List;
 public class BankOfficesLoader extends AsyncTaskLoader<List<BankDetails>> {
 
     private List<BankDetails> mList;
-//    private DBHelper mDbHelper;
-//    private Cursor mCursor = null;
-    private BankDetails mBankDetails;
-//    private List<BankDetails> mBankDetailsList;
 
     public BankOfficesLoader(Context context) {
         super(context);
@@ -45,37 +41,7 @@ public class BankOfficesLoader extends AsyncTaskLoader<List<BankDetails>> {
 
     @Override
     public List<BankDetails> loadInBackground() {
-
-//        if (Consts.GET_DATA_FROM_DB) {
-//            mBankDetailsList = new ArrayList<>();
-//            // This is the part where we download a bank detailed info from a database.
-//            mDbHelper = DBHelper.getInstance();
-//            mCursor = mDbHelper.getReadableDatabase().query(
-//                    false,
-//                    DBHelper.DATABASE_TABLE,
-//                    null,
-//                    null,
-//                    null,
-//                    null,
-//                    null,
-//                    null,
-//                    null
-//            );
-//            mCursor.moveToFirst();
-//            int i = 0;
-//            try {
-//                while (i != mCursor.getCount()) {
-//                    mBankDetailsList.add(mDbHelper.cursorToBankDetails(mCursor));
-//                    mCursor.moveToNext();
-//                    i++;
-//                }
-//            } finally {
-//                mCursor.close();
-//            }
-//            mList = mBankDetailsList;
-//        } else {
-            mList = new BanksDetailsOperating(getContext()).getmBanksDetailsList();
-//        }
+        mList = new BanksDetailsOperating(getContext()).getmBanksDetailsList();
         return mList;
     }
 

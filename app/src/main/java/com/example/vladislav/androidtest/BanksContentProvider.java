@@ -26,12 +26,20 @@ public class BanksContentProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
+                        String sortOrder) {
         // content://com.example.testproject/banks
         // content://com.example.testproject/workhour
         switch (uriMatcher.match(uri)) {
             case 0:
-                return dbHelper.getReadableDatabase().query(DBBanksContract.BankEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                return dbHelper.getReadableDatabase().query(
+                        DBBanksContract.BankEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder);
             case 1:
                 // TODO
         }

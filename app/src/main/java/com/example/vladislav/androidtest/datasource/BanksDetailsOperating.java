@@ -56,6 +56,7 @@ public class BanksDetailsOperating {
                     mEditor = mSharedPreferences.edit();
                     mEditor.putBoolean(Consts.DATABASE_ALREADY_POPULATED, true);
                     mEditor.commit();
+                    System.out.println("Database's Banks table already exists and its data also.");
                 }
             } else {
                 // Reading a table from a database.
@@ -103,13 +104,11 @@ public class BanksDetailsOperating {
             BankDetails mbank = new BankDetails();
             mbank.setmID(i);
             mbank.setmEstimationMark(mSharedPreferences.getInt(Consts.ESTIMATION_MARK + mbank.getmID(), -1));
-//            System.out.println(Consts.ESTIMATION_MARK+mbank.getmID());
             mbank.setmAddress("Тукая, " + (int) (Math.random() * 100));
             mbank.setmLatitude((int) (Math.random() * 100) + "." + (int) (Math.random() * 10000));
             mbank.setmLongtitude((int) (Math.random() * 100) + "." + (int) (Math.random() * 10000));
             mbank.setmDistance((int) (Math.random() * 20) + "." + (int) (Math.random() * 100) + " км.");
 
-//            mTemp = (int) (Math.random() * mBanksNumber);
             switch (i) {
                 case 0: {
                     mbank.setmName("Банк Авангард");

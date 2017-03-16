@@ -99,7 +99,6 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
         mRecyclerView.setVisibility(GONE);
         mProgressBar.setVisibility(VISIBLE);
         mTextView.setVisibility(VISIBLE);
-//        mTextView2 = (TextView) mRootView.findViewById(R.id.estimation_mark_text_view);
 //        task = new DownloadingTask(new DownloadingTask.BanksDataSourceCallbacks() {
 //            @Override
 //            public void onDownloadComplete(List<BankDetails> mList) {
@@ -115,9 +114,7 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
         // Loading the data by force. In this case, loading is done every time an activity created.
         // But we need it to load only once.
 //        getLoaderManager().initLoader(0, null, this).forceLoad();
-//        if (!BankDetails.loaded) {
-//            BankDetails.loaded = true;
-//            System.out.println("!");
+
             getLoaderManager().initLoader(0, null, this);
 //        }
     }
