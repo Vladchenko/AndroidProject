@@ -33,11 +33,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(ViewHolder2 holder, int position) {
         BankDetails bankDetails = mList.get(position);
-        holder.addressTextView.setText(bankDetails.getAddress());
-        holder.distanceTextView.setText(bankDetails.getDistance());
-        holder.extraOfficeTextView.setText(bankDetails.getName());
+        holder.addressTextView.setText(bankDetails.getmAddress());
+        holder.distanceTextView.setText(bankDetails.getmDistance());
+        holder.extraOfficeTextView.setText(bankDetails.getmName());
+        if (bankDetails.getmEstimationMark() > -1) {
+            holder.estimationTextView.setText("Оценка "
+                    + Integer.toString(bankDetails.getmEstimationMark()));
+        } else {
+            holder.estimationTextView.setText("");
+        }
         // No phone number in recycler layout
-//        holder.telephoneNTextView.setText(bankDetails.getPhoneNumber());
+//        holder.telephoneNTextView.setText(bankDetails.getmPhoneNumber());
     }
 
     @Override
@@ -59,6 +65,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView addressTextView;
         TextView extraOfficeTextView;
         TextView distanceTextView;
+        TextView estimationTextView;
         // No phone number in recycler layout
 //        TextView telephoneNTextView;
 
@@ -67,6 +74,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             addressTextView = (TextView) itemView.findViewById(R.id.address_text_view);
             extraOfficeTextView = (TextView) itemView.findViewById(R.id.extra_office_text_view);
             distanceTextView = (TextView) itemView.findViewById(R.id.distance_text_view);
+            estimationTextView = (TextView) itemView.findViewById(R.id.estimation_mark_text_view);
 //            telephoneNTextView = (TextView)itemView.findViewById(R.id.telephoneN_text_view);
             // No need to pass an image, it's already present in an activity.
         }

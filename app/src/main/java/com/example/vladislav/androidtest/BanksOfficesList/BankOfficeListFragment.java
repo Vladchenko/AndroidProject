@@ -1,6 +1,8 @@
 package com.example.vladislav.androidtest.BanksOfficesList;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,11 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.example.vladislav.androidtest.datasource.DownloadingTask;
+//import com.example.vladislav.androidtest.datasource.DownloadingTask;
 import com.example.vladislav.androidtest.R;
+import com.example.vladislav.androidtest.datasource.Consts;
 import com.example.vladislav.androidtest.datasource.RecyclerViewAdapter;
 import com.example.vladislav.androidtest.beans.BankDetails;
 
@@ -32,12 +34,17 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
     private BankOfficeCallbacks mListener;
 
     private View mRootView;
+//    private View mRootView2;
     private TextView mTextView;
-    private DownloadingTask task;
+//    private TextView mTextView2;
+//    private DownloadingTask task;
     private ProgressBar mProgressBar;
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mAdapter;
     private List<BankDetails> mList = Collections.emptyList();
+
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
 
     public BankOfficeListFragment() {
         // Required empty public constructor
@@ -60,20 +67,27 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
         mRootView = inflater.inflate(R.layout.bank_office_list_fragment, container, false);
         mProgressBar = (ProgressBar) mRootView.findViewById(R.id.progressBar);
         mRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recycler);
-        mTextView = (TextView) mRootView.findViewById(R.id.textView);
+
         mRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(mRootView.getContext(),
                         new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
                         mListener.onBankOfficeSelected(mList.get(position));
+                        mEditor = mSharedPreferences.edit();
+                        mEditor.putInt(Consts.BANK_LIST_INDEX, position);
+                        mEditor.commit();
                     }
                 })
         );
+        mTextView = (TextView) mRootView.findViewById(R.id.textView);
 
         mAdapter = new RecyclerViewAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
+
+        mSharedPreferences = getContext().getSharedPreferences(
+                Consts.SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
 
         // Inflate the layout for this fragment
         return mRootView;
@@ -85,6 +99,7 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
         mRecyclerView.setVisibility(GONE);
         mProgressBar.setVisibility(VISIBLE);
         mTextView.setVisibility(VISIBLE);
+//        mTextView2 = (TextView) mRootView.findViewById(R.id.estimation_mark_text_view);
 //        task = new DownloadingTask(new DownloadingTask.BanksDataSourceCallbacks() {
 //            @Override
 //            public void onDownloadComplete(List<BankDetails> mList) {
@@ -100,7 +115,11 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
         // Loading the data by force. In this case, loading is done every time an activity created.
         // But we need it to load only once.
 //        getLoaderManager().initLoader(0, null, this).forceLoad();
-        getLoaderManager().initLoader(0, null, this);
+//        if (!BankDetails.loaded) {
+//            BankDetails.loaded = true;
+//            System.out.println("!");
+            getLoaderManager().initLoader(0, null, this);
+//        }
     }
 
     @Override
@@ -115,8 +134,6 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
         mListener = null;
     }
 
-
-
     @Override
     public Loader<List<BankDetails>> onCreateLoader(int id, Bundle args) {
         return new BankOfficesLoader(getContext());
@@ -129,6 +146,20 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
         mProgressBar.setVisibility(GONE);
         mRecyclerView.setVisibility(VISIBLE);
         mTextView.setVisibility(GONE);
+
+//        int defaultValue = -1;
+//        int highScore = mSharedPreferences.getInt(Consts.ESTIMATION_MARK, defaultValue);
+//        System.out.println("estimation_mark is: " + highScore);
+//        int bankPosition = mSharedPreferences.getInt(Consts.BNK_LIST_INDEX, defaultValue);
+//        System.out.println("bank_position is: " + bankPosition);
+//        if (highScore > -1) {
+//            ((TextView) findViewById())
+//                    .setText("123");
+//        }
+
+//        System.out.println(mList.get(10/* position of a clicked bank */).getmEstimationMark());
+//        mList.get().setmEstimationMark();
+
     }
 
     @Override

@@ -9,24 +9,30 @@ import android.os.Parcelable;
 
 public class BankDetails implements Parcelable {
 
-    private String address;
-    private String distance;
-    private String name; // extra office
-    private String latitude;
-    private String longtitude;
-    private String workingHours;
-    private String phoneNumber;
-    private String qualityControl;
+    public static boolean loaded = false;
+    private String mAddress;
+    private String mDistance;
+    private String mName; // extra office
+    private String mLatitude;
+    private String mLongtitude;
+    private String mWorkingHours;
+    private String mPhoneNumber;
+    private String mQualityControl;
+    private int mID;
+    private int mEstimationMark;
 
     protected BankDetails(Parcel in) {
-        setAddress(in.readString());
-        setName(in.readString());
-        setLatitude(in.readString());
-        setLongtitude(in.readString());
-        setDistance(in.readString());
-        setWorkingHours(in.readString());
-        setPhoneNumber(in.readString());
-        setQualityControl(in.readString());
+        setmAddress(in.readString());
+        setmName(in.readString());
+        setmLatitude(in.readString());
+        setmLongtitude(in.readString());
+        setmDistance(in.readString());
+        setmWorkingHours(in.readString());
+        setmPhoneNumber(in.readString());
+        setmQualityControl(in.readString());
+//        mID = (int)(Math.random() * Integer.MAX_VALUE);
+        // -1 means there was no estimation provided for this bank.
+        setmEstimationMark(-1);
     }
 
     public static final Creator<BankDetails> CREATOR = new Creator<BankDetails>() {
@@ -52,77 +58,93 @@ public class BankDetails implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(getAddress());
-        dest.writeString(getName());
-        dest.writeString(getLatitude());
-        dest.writeString(getLongtitude());
-        dest.writeString(getDistance());
-        dest.writeString(getWorkingHours());
-        dest.writeString(getPhoneNumber());
-        dest.writeString(getQualityControl());
+        dest.writeString(getmAddress());
+        dest.writeString(getmName());
+        dest.writeString(getmLatitude());
+        dest.writeString(getmLongtitude());
+        dest.writeString(getmDistance());
+        dest.writeString(getmWorkingHours());
+        dest.writeString(getmPhoneNumber());
+        dest.writeString(getmQualityControl());
     }
 
-    public String getAddress() {
-        return address;
+    public String getmAddress() {
+        return mAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setmAddress(String mAddress) {
+        this.mAddress = mAddress;
     }
 
-    public String getName() {
-        return name;
+    public String getmName() {
+        return mName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setmName(String mName) {
+        this.mName = mName;
     }
 
-    public String getLatitude() {
-        return latitude;
+    public String getmLatitude() {
+        return mLatitude;
     }
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
+    public void setmLatitude(String mLatitude) {
+        this.mLatitude = mLatitude;
     }
 
-    public String getLongtitude() {
-        return longtitude;
+    public String getmLongtitude() {
+        return mLongtitude;
     }
 
-    public void setLongtitude(String longtitude) {
-        this.longtitude = longtitude;
+    public void setmLongtitude(String mLongtitude) {
+        this.mLongtitude = mLongtitude;
     }
 
-    public String getWorkingHours() {
-        return workingHours;
+    public String getmWorkingHours() {
+        return mWorkingHours;
     }
 
-    public void setWorkingHours(String workingHours) {
-        this.workingHours = workingHours;
+    public void setmWorkingHours(String mWorkingHours) {
+        this.mWorkingHours = mWorkingHours;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getmPhoneNumber() {
+        return mPhoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setmPhoneNumber(String mPhoneNumber) {
+        this.mPhoneNumber = mPhoneNumber;
     }
 
-    public String getQualityControl() {
-        return qualityControl;
+    public String getmQualityControl() {
+        return mQualityControl;
     }
 
-    public void setQualityControl(String qualityControl) {
-        this.qualityControl = qualityControl;
+    public void setmQualityControl(String mQualityControl) {
+        this.mQualityControl = mQualityControl;
     }
 
-    public String getDistance() {
-        return distance;
+    public String getmDistance() {
+        return mDistance;
     }
 
-    public void setDistance(String distance) {
-        this.distance = distance;
+    public void setmDistance(String mDistance) {
+        this.mDistance = mDistance;
+    }
+
+    public int getmID() {
+        return mID;
+    }
+
+    public void setmID(int mID) {
+        this.mID = mID;
+    }
+
+    public int getmEstimationMark() {
+        return mEstimationMark;
+    }
+
+    public void setmEstimationMark(int mEstimationMark) {
+        this.mEstimationMark = mEstimationMark;
     }
 }

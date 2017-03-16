@@ -1,10 +1,8 @@
 package com.example.vladislav.androidtest.BankOfficeDetailedInfo;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Parcelable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.AttributeSet;
@@ -14,10 +12,9 @@ import android.widget.TextView;
 
 import com.example.vladislav.androidtest.R;
 import com.example.vladislav.androidtest.beans.BankDetails;
+import com.example.vladislav.androidtest.datasource.Consts;
 
 public class DetailedInfoActivity extends AppCompatActivity {
-
-    public static final String EXTRA_BANK = "com.example.vladislav.androidtest.EXTRA_BANK";
 
     private String mTemp;
     private TextView mTextView;
@@ -36,59 +33,59 @@ public class DetailedInfoActivity extends AppCompatActivity {
 
         setContentView(R.layout.detailed_info_activity);
         Intent intent = getIntent();
-        // Getting a detailed bank info from an intent got from a FragmentsActivity.
-        Parcelable extraBank = (Parcelable) intent.getParcelableExtra(EXTRA_BANK);
+        // Getting a detailed bank info from an intent got from a BankOfficeListActivity.
+        Parcelable extraBank = (Parcelable) intent.getParcelableExtra(Consts.EXTRA_BANK);
 
-        mTemp = ((BankDetails) extraBank).getAddress();
+        mTemp = ((BankDetails) extraBank).getmAddress();
         mTextView = (TextView) findViewById(R.id.address_text_view);
         mTextView.setText(mTemp);
 
-        mTemp = ((BankDetails) extraBank).getDistance();
+        mTemp = ((BankDetails) extraBank).getmDistance();
         mTextView = (TextView) findViewById(R.id.distance_text_view);
         mTextView.setText(mTemp);
 
-        mTemp = ((BankDetails) extraBank).getName();
+        mTemp = ((BankDetails) extraBank).getmName();
         mTextView = (TextView) findViewById(R.id.extra_office_text_view);
         mTextView.setText(mTemp);
 
-        mTemp = ((BankDetails) extraBank).getPhoneNumber();
+        mTemp = ((BankDetails) extraBank).getmPhoneNumber();
         mTextView = (TextView) findViewById(R.id.telephoneN_text_view);
         mTextView.setText(mTemp);
 
         mButton = (Button) findViewById(R.id.qualityEstimation_button);
 
         // add mButton listener
-        mButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        mContext);
-
-                // set title
-                alertDialogBuilder.setTitle("Пожалуйста оцените качество, работы нашего филиала.");
-
-                // set dialog message
-                alertDialogBuilder
-                        .setCancelable(true)
-                        .setSingleChoiceItems(mEstimationGroup, -1, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int item) {
-                                dialog.dismiss();// dismiss the alertbox after chose option
-                                Intent intent = new Intent();
-                                mEstimationMark = (String) mEstimationGroup[item];
-                                intent.putExtra("mEstimationMark", mEstimationMark);
-                                setResult(RESULT_OK, intent);
-                            }
-                        });
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
-                alertDialog.show();
-            }
-        });
+//        mButton.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View arg0) {
+//
+//                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+//                        mContext);
+//
+//                // set title
+//                alertDialogBuilder.setTitle("Пожалуйста оцените качество, работы нашего филиала.");
+//
+//                // set dialog message
+//                alertDialogBuilder
+//                        .setCancelable(true)
+//                        .setSingleChoiceItems(mEstimationGroup, -1, new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int item) {
+//                                dialog.dismiss();// dismiss the alertbox after chose option
+//                                Intent intent = new Intent();
+//                                mEstimationMark = (String) mEstimationGroup[item];
+//                                intent.putExtra("mEstimationMark", mEstimationMark);
+//                                setResult(RESULT_OK, intent);
+//                            }
+//                        });
+//
+//                // create alert dialog
+//                AlertDialog alertDialog = alertDialogBuilder.create();
+//
+//                // show it
+//                alertDialog.show();
+//            }
+//        });
 
         return getWindow().getDecorView().getRootView();
 

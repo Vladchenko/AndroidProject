@@ -14,7 +14,7 @@
         android:layout_toRightOf="@id/house_image_view"
         android:gravity="bottom|left"
         android:maxLines="1"
-        android:text="@string/address"
+        android:text="@string/mAddress"
         android:textSize="@dimen/address_text_size" />
 
     <TextView
@@ -36,7 +36,7 @@
         android:layout_toRightOf="@id/address_text_view"
         android:gravity="right|center"
         android:paddingRight="@dimen/distance_right_padding"
-        android:text="@string/distance"
+        android:text="@string/mDistance"
         android:textSize="@dimen/distance_text_size" />
 
 </RelativeLayout>

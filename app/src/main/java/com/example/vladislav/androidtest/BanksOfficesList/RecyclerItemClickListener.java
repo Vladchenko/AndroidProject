@@ -1,10 +1,13 @@
 package com.example.vladislav.androidtest.BanksOfficesList;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.example.vladislav.androidtest.datasource.Consts;
 
 /**
  * Created by vladislav on 06.02.17.
@@ -14,6 +17,9 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
 
     private OnItemClickListener mListener;
     private GestureDetector mGestureDetector;
+
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
 
     public interface OnItemClickListener {
         public void onItemClick(View view, int position);
@@ -27,6 +33,9 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
                 return true;
             }
         });
+        mSharedPreferences = context.getSharedPreferences(
+                Consts.SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
+        mEditor = mSharedPreferences.edit();
     }
 
     @Override
@@ -34,6 +43,10 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
         View childView = view.findChildViewUnder(e.getX(), e.getY());
         if (childView != null && mListener != null && mGestureDetector.onTouchEvent(e)) {
             mListener.onItemClick(childView, view.getChildAdapterPosition(childView));
+            // Position(index) of a clicked item in a list.
+            mEditor.putInt(Consts.BANK_LIST_INDEX, view.getChildAdapterPosition(childView));
+            mEditor.commit();
+//            System.out.println(view.getChildAdapterPosition(childView));
         }
         return false;
     }

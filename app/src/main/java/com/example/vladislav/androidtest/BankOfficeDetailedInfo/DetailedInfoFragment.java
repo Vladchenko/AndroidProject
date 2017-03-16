@@ -2,13 +2,14 @@ package com.example.vladislav.androidtest.BankOfficeDetailedInfo;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -22,8 +23,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.vladislav.androidtest.BanksOfficesList.BankOfficeListActivity;
 import com.example.vladislav.androidtest.R;
 import com.example.vladislav.androidtest.beans.BankDetails;
+import com.example.vladislav.androidtest.database.DBBanksContract;
+import com.example.vladislav.androidtest.database.DBHelper;
+import com.example.vladislav.androidtest.datasource.Consts;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,12 +40,19 @@ import com.example.vladislav.androidtest.beans.BankDetails;
  */
 public class DetailedInfoFragment extends Fragment {
 
+//    public static final boolean GET_DATA_FROM_DB = true;
+
     private CharSequence[] mEstimationGroup = {"1", "2", "3", "4", "5"};
     private OnFragmentInteractionListener mListener;
     private BankDetails mBankDetails;
     private String mEstimationMark;
     private TextView mTextView;
-//    private Layout mDistanceLayout;
+    //    private Layout mDistanceLayout;
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    private DBHelper mDbHelper;
+    private Cursor mCursor = null;
+    private int mBankListIndex;
 
     /**
      * This interface must be implemented by activities that contain this
@@ -65,9 +77,13 @@ public class DetailedInfoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
-            mBankDetails = getArguments().getParcelable("bankOffice");
+            mBankDetails = getArguments().getParcelable(Consts.BANK_DETAILS_PARCELABLE);
         }
+
+        mSharedPreferences = getContext().getSharedPreferences(
+                Consts.SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
 
     }
 
@@ -79,40 +95,32 @@ public class DetailedInfoFragment extends Fragment {
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
-
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         mTextView = (TextView) view.findViewById(R.id.address_text_view);
-        mTextView.setText(mBankDetails.getAddress());
+        mTextView.setText(mBankDetails.getmAddress());
 
         mTextView = (TextView) view.findViewById(R.id.distance_text_view);
-        mTextView.setText(mBankDetails.getDistance());
+        mTextView.setText(mBankDetails.getmDistance());
 
         mTextView = (TextView) view.findViewById(R.id.extra_office_text_view);
-        mTextView.setText(mBankDetails.getName());
+        mTextView.setText(mBankDetails.getmName());
 
         mTextView = (TextView) view.findViewById(R.id.telephoneN_text_view);
-        mTextView.setText(mBankDetails.getPhoneNumber());
-
+        mTextView.setText(mBankDetails.getmPhoneNumber());
 
         mTextView = (TextView) view.findViewById(R.id.monday_hours_text_view);
-        mTextView.setText(mBankDetails.getWorkingHours());
+        mTextView.setText(mBankDetails.getmWorkingHours());
         mTextView = (TextView) view.findViewById(R.id.tuesday_hours_text_view);
-        mTextView.setText(mBankDetails.getWorkingHours());
+        mTextView.setText(mBankDetails.getmWorkingHours());
         mTextView = (TextView) view.findViewById(R.id.wednesday_hours_text_view);
-        mTextView.setText(mBankDetails.getWorkingHours());
+        mTextView.setText(mBankDetails.getmWorkingHours());
         mTextView = (TextView) view.findViewById(R.id.thursday_hours_text_view);
-        mTextView.setText(mBankDetails.getWorkingHours());
+        mTextView.setText(mBankDetails.getmWorkingHours());
         mTextView = (TextView) view.findViewById(R.id.friday_hours_text_view);
-        mTextView.setText(mBankDetails.getWorkingHours());
+        mTextView.setText(mBankDetails.getmWorkingHours());
 
         Button button = (Button) view.findViewById(R.id.qualityEstimation_button);
 
@@ -126,32 +134,20 @@ public class DetailedInfoFragment extends Fragment {
                         view.getContext());
 
                 // set title
-                alertDialogBuilder.setTitle("Пожалуйста оцените качество работы нашего филиала.");
+                alertDialogBuilder.setTitle(Consts.BANK_DEPARTMENT_ESTIMATION_MESSAGE);
 
                 // set dialog message
                 alertDialogBuilder
 //                        .setMessage("Click yes to exit!")
                         .setCancelable(true)
-//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int id) {
-//                                // if this button is clicked, close
-//                                // current activity
-//                                DetailedInfoActivity.this.finish();
-//                            }
-//                        })
-//                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int id) {
-//                                // if this button is clicked, just close
-//                                // the dialog box and do nothing
-//                                dialog.cancel();
-//                            }
-//                        })
                         .setSingleChoiceItems(mEstimationGroup, -1, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int item) {
                                 dialog.dismiss();// dismiss the alertbox after chose option
                                 mEstimationMark = (String) mEstimationGroup[item];
-//                                intent.putExtra("mEstimationMark",mEstimationMark);
-//                                setResult(RESULT_OK, intent);
+                                mEditor = mSharedPreferences.edit();
+                                mEditor.putInt(Consts.ESTIMATION_MARK + mBankDetails.getmID(), Integer.parseInt(mEstimationMark));
+//                                System.out.println(Consts.ESTIMATION_MARK+mBankDetails.getmID() + ":" + mEstimationMark);
+                                mEditor.commit();
                                 mListener.onEstimatingBank(mEstimationMark);
                             }
                         });
@@ -161,6 +157,7 @@ public class DetailedInfoFragment extends Fragment {
 
                 // show it
                 alertDialog.show();
+
             }
         });
 
@@ -169,8 +166,6 @@ public class DetailedInfoFragment extends Fragment {
         mImageViewPhoneSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
-//                startActivity(intent);
                 int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE);
 
                 if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
@@ -181,9 +176,8 @@ public class DetailedInfoFragment extends Fragment {
                     );
                 } else {
                     startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse(
-//                            "tel:12345678901"
-                            "tel:" +
-                                    (String) ((TextView) view.findViewById(R.id.telephoneN_text_view)).getText())));
+                            "tel:"
+                                    + (String) ((TextView) view.findViewById(R.id.telephoneN_text_view)).getText())));
                 }
             }
         });
@@ -194,12 +188,12 @@ public class DetailedInfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Create a Uri from an intent string. Use the result to create an Intent.
-                Uri gmmIntentUri = Uri.parse("google.streetview:cbll=46.414382,10.013988");
+                Uri gmmIntentUri = Uri.parse(Consts.GOOGLE_MAPS_URI);
 
                 // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 // Make the Intent explicit by setting the Google Maps package
-                mapIntent.setPackage("com.google.android.apps.maps");
+                mapIntent.setPackage(Consts.GOOGLE_MAPS_PACKAGE);
 
                 // Attempt to start an activity that can handle the Intent
                 startActivity(mapIntent);
