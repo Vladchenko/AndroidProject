@@ -7,13 +7,18 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.vladislav.androidtest.BanksOfficesList.BankOfficeListActivity;
 import com.example.vladislav.androidtest.beans.BankDetails;
-import com.example.vladislav.androidtest.datasource.Consts;
+import com.example.vladislav.androidtest.Consts;
 
 /**
  * Created by vladislav on 14.03.17.
  */
+
+    // TODO dbname - move to DBHelper
+    // TODO remove columns from DBBanksContract
+    // TODO DBTable remove from consts, use one from DBBanksContract
+    // TODO Move DBVersion to DBHelper
+    //
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -60,11 +65,11 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // This database is only a cache for online data, so its upgrade policy is
-        // to simply to discard the data and start over
-        db.execSQL(DBBanksContract.SQL_DROP_TABLE);
-        System.out.println("DB Banks table has been deleted.");
-        onCreate(db);
+//        // This database is only a cache for online data, so its upgrade policy is
+//        // to simply to discard the data and start over
+//        db.execSQL(DBBanksContract.SQL_DROP_TABLE);
+//        System.out.println("DB Banks table has been deleted.");
+//        onCreate(db);
     }
 
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -78,7 +83,7 @@ public class DBHelper extends SQLiteOpenHelper {
         System.out.println("DB Banks table has been created.");
     }
 
-    public BankDetails cursorToBankDetails(Cursor cursor) {
+    public static BankDetails cursorToBankDetails(Cursor cursor) {
         BankDetails bankDetails = new BankDetails();
         bankDetails.setmAddress(cursor.getString(1));
         bankDetails.setmDistance(cursor.getString(2));

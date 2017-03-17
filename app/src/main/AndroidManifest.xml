@@ -4,21 +4,33 @@
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
+    <permission android:name="com.android.androidtest.READ_DATABASE" android:protectionLevel="normal" />
+    <permission android:name="com.android.androidtest.WRITE_DATABASE" android:protectionLevel="normal" />
+
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".MyApplication"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".BanksOfficesList.BankOfficeListActivity">
+
+        <activity android:name=".BanksOfficesList.BankOfficeListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BankOfficeDetailedInfo.DetailedInfoActivity"/>
+
+        <activity android:name=".BankOfficeDetailedInfo.DetailedInfoActivity" />
+
+        <provider
+            android:name="com.example.vladislav.androidtest.BanksContentProvider"
+            android:authorities="com.example.vladislav.androidtest"
+            android:exported="true"
+            android:enabled="true">
+        </provider>
+
     </application>
 
 </manifest>

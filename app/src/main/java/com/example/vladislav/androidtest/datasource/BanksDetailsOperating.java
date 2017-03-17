@@ -3,9 +3,8 @@ package com.example.vladislav.androidtest.datasource;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteConstraintException;
 
-import com.example.vladislav.androidtest.BanksOfficesList.BankOfficeListActivity;
+import com.example.vladislav.androidtest.Consts;
 import com.example.vladislav.androidtest.beans.BankDetails;
 import com.example.vladislav.androidtest.database.DBHelper;
 

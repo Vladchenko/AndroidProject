@@ -12,16 +12,17 @@ import com.example.vladislav.androidtest.database.DBHelper;
 
 public class BanksContentProvider extends ContentProvider {
 
-    DBHelper dbHelper;
+    private static final UriMatcher uriMatcher;
 
-    UriMatcher uriMatcher = new UriMatcher(0);
+    static{
+        uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+        uriMatcher.addURI("com.example.vladislav.androidtest", "BANKS", 0);
+    }
 
     @Override
     public boolean onCreate() {
-        dbHelper = DBHelper.getInstance();
-        uriMatcher.addURI("com.example.testproject/banks", "banks", 0);
-        uriMatcher.addURI("com.example.testproject/banks", "workhour", 0);
-        return false;
+       // uriMatcher.addURI("com.example.vladislav.androidtest", "banks", 0);
+        return true;
     }
 
     @Nullable
@@ -30,9 +31,9 @@ public class BanksContentProvider extends ContentProvider {
                         String sortOrder) {
         // content://com.example.testproject/banks
         // content://com.example.testproject/workhour
-        switch (uriMatcher.match(uri)) {
-            case 0:
-                return dbHelper.getReadableDatabase().query(
+        Cursor cursor;
+        if (uriMatcher.match(uri)==0){
+           cursor =  DBHelper.getInstance().getReadableDatabase().query(
                         DBBanksContract.BankEntry.TABLE_NAME,
                         projection,
                         selection,
@@ -40,8 +41,7 @@ public class BanksContentProvider extends ContentProvider {
                         null,
                         null,
                         sortOrder);
-            case 1:
-                // TODO
+            return cursor;
         }
         return null;
     }

@@ -1,10 +1,16 @@
-package com.example.vladislav.androidtest.datasource;
+package com.example.vladislav.androidtest;
 
 /**
  * Created by vladislav on 15.03.17.
  */
 
 public class Consts {
+
+    // TODO Understand which layer should hold which class.
+    // TODO Remove a commented code thoroughly.
+    // TODO Remove mTemp - name everyone of them with separate name. One way - make mTemp local.
+    // TODO When app is huge - better make a utility class
+    // TODO TEST TASK is done until 27th. On 3rd there will be an interview.
 
     public static final boolean GET_DATA_FROM_DB = true;
     public static final int DATABASE_VERSION = 1;

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.vladislav.androidtest.R;
 import com.example.vladislav.androidtest.beans.BankDetails;
-import com.example.vladislav.androidtest.datasource.Consts;
+import com.example.vladislav.androidtest.Consts;
 
 public class DetailedInfoActivity extends AppCompatActivity {
 

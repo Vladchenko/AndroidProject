@@ -3,6 +3,7 @@ package com.example.vladislav.androidtest.BanksOfficesList;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,9 +19,9 @@ import android.widget.TextView;
 
 //import com.example.vladislav.androidtest.datasource.DownloadingTask;
 import com.example.vladislav.androidtest.R;
-import com.example.vladislav.androidtest.datasource.Consts;
-import com.example.vladislav.androidtest.datasource.RecyclerViewAdapter;
+import com.example.vladislav.androidtest.Consts;
 import com.example.vladislav.androidtest.beans.BankDetails;
+import com.example.vladislav.androidtest.database.DBHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,19 +30,16 @@ import java.util.List;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class BankOfficeListFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<BankDetails>> {
+public class BankOfficeListFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private BankOfficeCallbacks mListener;
 
     private View mRootView;
-//    private View mRootView2;
     private TextView mTextView;
-//    private TextView mTextView2;
-//    private DownloadingTask task;
     private ProgressBar mProgressBar;
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mAdapter;
-    private List<BankDetails> mList = Collections.emptyList();
+    private List<BankDetails> mList;
 
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
@@ -71,14 +69,14 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
         mRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(mRootView.getContext(),
                         new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        mListener.onBankOfficeSelected(mList.get(position));
-                        mEditor = mSharedPreferences.edit();
-                        mEditor.putInt(Consts.BANK_LIST_INDEX, position);
-                        mEditor.commit();
-                    }
-                })
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                mListener.onBankOfficeSelected(mList.get(position));
+                                mEditor = mSharedPreferences.edit();
+                                mEditor.putInt(Consts.BANK_LIST_INDEX, position);
+                                mEditor.commit();
+                            }
+                        })
         );
         mTextView = (TextView) mRootView.findViewById(R.id.textView);
 
@@ -99,30 +97,12 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
         mRecyclerView.setVisibility(GONE);
         mProgressBar.setVisibility(VISIBLE);
         mTextView.setVisibility(VISIBLE);
-//        task = new DownloadingTask(new DownloadingTask.BanksDataSourceCallbacks() {
-//            @Override
-//            public void onDownloadComplete(List<BankDetails> mList) {
-//                mAdapter.update(mList);
-//                BankOfficeListFragment.this.mList = mList;
-//                mProgressBar.setVisibility(GONE);
-//                mRecyclerView.setVisibility(VISIBLE);
-//                mTextView.setVisibility(GONE);
-//            }
-//        });
-//        task.execute();
-
-        // Loading the data by force. In this case, loading is done every time an activity created.
-        // But we need it to load only once.
-//        getLoaderManager().initLoader(0, null, this).forceLoad();
-
-            getLoaderManager().initLoader(0, null, this);
-//        }
+        getLoaderManager().initLoader(0, null, this);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        task.cancel(true);
     }
 
     @Override
@@ -132,35 +112,31 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
     }
 
     @Override
-    public Loader<List<BankDetails>> onCreateLoader(int id, Bundle args) {
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return new BankOfficesLoader(getContext());
     }
 
     @Override
-    public void onLoadFinished(Loader<List<BankDetails>> loader, List<BankDetails> data) {
-        mAdapter.update(data);
-        mList = data;
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+        mList = new ArrayList<>(data.getCount());
+        data.moveToFirst();
+        int i = 0;
+        while (i != data.getCount()) {
+            mList.add(DBHelper.cursorToBankDetails(data));
+            data.moveToNext();
+            i++;
+        }
+
+        mAdapter.update(mList);
         mProgressBar.setVisibility(GONE);
         mRecyclerView.setVisibility(VISIBLE);
         mTextView.setVisibility(GONE);
 
-//        int defaultValue = -1;
-//        int highScore = mSharedPreferences.getInt(Consts.ESTIMATION_MARK, defaultValue);
-//        System.out.println("estimation_mark is: " + highScore);
-//        int bankPosition = mSharedPreferences.getInt(Consts.BNK_LIST_INDEX, defaultValue);
-//        System.out.println("bank_position is: " + bankPosition);
-//        if (highScore > -1) {
-//            ((TextView) findViewById())
-//                    .setText("123");
-//        }
-
-//        System.out.println(mList.get(10/* position of a clicked bank */).getmEstimationMark());
-//        mList.get().setmEstimationMark();
-
     }
 
     @Override
-    public void onLoaderReset(Loader<List<BankDetails>> loader) {
+    public void onLoaderReset(Loader<Cursor> loader) {
         mAdapter.update(new ArrayList()); // mList seems perform good here, why not use it ?
     }
 

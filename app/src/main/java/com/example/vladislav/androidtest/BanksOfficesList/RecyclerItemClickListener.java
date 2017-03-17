@@ -7,7 +7,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.vladislav.androidtest.datasource.Consts;
+import com.example.vladislav.androidtest.Consts;
 
 /**
  * Created by vladislav on 06.02.17.

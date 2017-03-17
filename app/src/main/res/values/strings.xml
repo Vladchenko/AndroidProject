@@ -9,4 +9,6 @@
     <string name="progress_bar_inscription">Please wait, list of banks is downloading now ...</string>
     <string name="detailed_info_empty">Click on a needed bank to see its details.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_read">Read from this app</string>
+    <string name="app_write">Write to this app</string>
 </resources>

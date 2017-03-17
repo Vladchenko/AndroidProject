@@ -23,12 +23,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.vladislav.androidtest.BanksOfficesList.BankOfficeListActivity;
 import com.example.vladislav.androidtest.R;
 import com.example.vladislav.androidtest.beans.BankDetails;
-import com.example.vladislav.androidtest.database.DBBanksContract;
 import com.example.vladislav.androidtest.database.DBHelper;
-import com.example.vladislav.androidtest.datasource.Consts;
+import com.example.vladislav.androidtest.Consts;
 
 /**
  * A simple {@link Fragment} subclass.

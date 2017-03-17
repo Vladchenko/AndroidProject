@@ -1,4 +1,4 @@
-package com.example.vladislav.androidtest.datasource;
+package com.example.vladislav.androidtest.BanksOfficesList;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

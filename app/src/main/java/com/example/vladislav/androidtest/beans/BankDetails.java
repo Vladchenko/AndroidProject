@@ -30,7 +30,6 @@ public class BankDetails implements Parcelable {
         setmWorkingHours(in.readString());
         setmPhoneNumber(in.readString());
         setmQualityControl(in.readString());
-//        mID = (int)(Math.random() * Integer.MAX_VALUE);
         // -1 means there was no estimation provided for this bank.
         setmEstimationMark(-1);
     }

@@ -7,21 +7,17 @@ import android.content.res.Configuration;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.vladislav.androidtest.MyApplication;
 import com.example.vladislav.androidtest.R;
 import com.example.vladislav.androidtest.beans.BankDetails;
-import com.example.vladislav.androidtest.BanksOfficesList.BankOfficeListFragment;
 import com.example.vladislav.androidtest.BanksOfficesList.BankOfficeListFragment.BankOfficeCallbacks;
 import com.example.vladislav.androidtest.BankOfficeDetailedInfo.DetailedInfoFragment;
-import com.example.vladislav.androidtest.datasource.Consts;
+import com.example.vladislav.androidtest.Consts;
 
 public class BankOfficeListActivity extends AppCompatActivity implements BankOfficeCallbacks,
         DetailedInfoFragment.OnFragmentInteractionListener {
