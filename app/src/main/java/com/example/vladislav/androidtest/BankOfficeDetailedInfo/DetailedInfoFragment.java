@@ -38,8 +38,6 @@ import com.example.vladislav.androidtest.Consts;
  */
 public class DetailedInfoFragment extends Fragment {
 
-//    public static final boolean GET_DATA_FROM_DB = true;
-
     private CharSequence[] mEstimationGroup = {"1", "2", "3", "4", "5"};
     private OnFragmentInteractionListener mListener;
     private BankDetails mBankDetails;
@@ -61,13 +59,11 @@ public class DetailedInfoFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         public void onEstimatingBank(String estimationMark);
     }
 
-    public DetailedInfoFragment() {
-        // Required empty public constructor
-    }
+    // Required empty public constructor
+    public DetailedInfoFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,7 +79,6 @@ public class DetailedInfoFragment extends Fragment {
 
     }
 
-    // Remove this method, if further operating is doing fine there.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -158,6 +153,7 @@ public class DetailedInfoFragment extends Fragment {
         });
 
         ImageView mImageViewPhoneSet = (ImageView) view.findViewById(R.id.phoneSet_image_view);
+
         // Clicking on a phoneset and making a call
         mImageViewPhoneSet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -179,6 +175,7 @@ public class DetailedInfoFragment extends Fragment {
         });
 
         RelativeLayout mDistanceLayout = (RelativeLayout) view.findViewById(R.id.directionDistance);
+
         // Clicking on a distance layout and launching a google maps app.
         mDistanceLayout.setOnClickListener(new View.OnClickListener() {
             @Override

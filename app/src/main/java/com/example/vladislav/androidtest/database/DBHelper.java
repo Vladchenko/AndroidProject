@@ -14,13 +14,10 @@ import com.example.vladislav.androidtest.Consts;
  * Created by vladislav on 14.03.17.
  */
 
-    // TODO dbname - move to DBHelper
-    // TODO remove columns from DBBanksContract
-    // TODO DBTable remove from consts, use one from DBBanksContract
-    // TODO Move DBVersion to DBHelper
-    //
-
 public class DBHelper extends SQLiteOpenHelper {
+
+    public static final String DATABASE_NAME = "Banks.db";
+    public static final int DATABASE_VERSION = 1;
 
     private static DBHelper instance;
     private static SharedPreferences mSharedPreferences;
@@ -35,7 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //            + DBBanksContract.BankEntry.PHONENUMBER + " TEXT )";
 
     public static void createInstance(Context context) {
-        // Use in case of necessity.
+        // Use in case of needing to recreate a database.
 //        dropDataBase(context);
         if (instance == null) {
             instance = new DBHelper(context);
@@ -47,14 +44,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 Consts.SHARED_PREFERENCES_FILE, Context.MODE_PRIVATE);
         mEditor = mSharedPreferences.edit();
         System.out.println("Removing a database");
-        context.deleteDatabase(Consts.DATABASE_NAME);
+        context.deleteDatabase(DATABASE_NAME);
         System.out.println("Database has been dropped");
         mEditor.putBoolean(Consts.DATABASE_ALREADY_POPULATED, false);
         mEditor.commit();
     }
 
     private DBHelper(Context context) {
-        super(context, Consts.DATABASE_NAME, null, Consts.DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     public static DBHelper getInstance() {
@@ -65,15 +62,9 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//        // This database is only a cache for online data, so its upgrade policy is
-//        // to simply to discard the data and start over
-//        db.execSQL(DBBanksContract.SQL_DROP_TABLE);
-//        System.out.println("DB Banks table has been deleted.");
-//        onCreate(db);
     }
 
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Do update database
     }
 
     @Override

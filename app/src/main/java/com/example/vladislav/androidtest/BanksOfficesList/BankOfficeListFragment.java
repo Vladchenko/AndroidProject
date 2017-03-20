@@ -16,15 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-//import com.example.vladislav.androidtest.datasource.DownloadingTask;
 import com.example.vladislav.androidtest.R;
 import com.example.vladislav.androidtest.Consts;
 import com.example.vladislav.androidtest.beans.BankDetails;
 import com.example.vladislav.androidtest.database.DBHelper;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static android.view.View.GONE;
@@ -44,9 +40,8 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
 
-    public BankOfficeListFragment() {
-        // Required empty public constructor
-    }
+    // Required empty public constructor
+    public BankOfficeListFragment() { }
 
     @Override
     public void onAttach(Activity activity) {
@@ -137,7 +132,7 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        mAdapter.update(new ArrayList()); // mList seems perform good here, why not use it ?
+        mAdapter.update(new ArrayList());
     }
 
     public interface BankOfficeCallbacks {

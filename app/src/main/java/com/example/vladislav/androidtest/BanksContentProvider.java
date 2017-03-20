@@ -21,7 +21,6 @@ public class BanksContentProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-       // uriMatcher.addURI("com.example.vladislav.androidtest", "banks", 0);
         return true;
     }
 

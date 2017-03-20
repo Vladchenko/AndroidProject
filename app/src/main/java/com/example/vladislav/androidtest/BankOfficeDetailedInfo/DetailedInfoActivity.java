@@ -16,7 +16,6 @@ import com.example.vladislav.androidtest.Consts;
 
 public class DetailedInfoActivity extends AppCompatActivity {
 
-    private String mTemp;
     private TextView mTextView;
     private Button mButton;
     private final Context mContext = this;
@@ -33,59 +32,23 @@ public class DetailedInfoActivity extends AppCompatActivity {
 
         setContentView(R.layout.detailed_info_activity);
         Intent intent = getIntent();
+
         // Getting a detailed bank info from an intent got from a BankOfficeListActivity.
         Parcelable extraBank = (Parcelable) intent.getParcelableExtra(Consts.EXTRA_BANK);
 
-        mTemp = ((BankDetails) extraBank).getmAddress();
-        mTextView = (TextView) findViewById(R.id.address_text_view);
-        mTextView.setText(mTemp);
+        ((TextView) findViewById(R.id.address_text_view)).
+                setText(((BankDetails) extraBank).getmAddress());
 
-        mTemp = ((BankDetails) extraBank).getmDistance();
-        mTextView = (TextView) findViewById(R.id.distance_text_view);
-        mTextView.setText(mTemp);
+        ((TextView) findViewById(R.id.distance_text_view)).
+                setText(((BankDetails) extraBank).getmDistance());
 
-        mTemp = ((BankDetails) extraBank).getmName();
-        mTextView = (TextView) findViewById(R.id.extra_office_text_view);
-        mTextView.setText(mTemp);
+        ((TextView) findViewById(R.id.extra_office_text_view)).
+                setText(((BankDetails) extraBank).getmName());
 
-        mTemp = ((BankDetails) extraBank).getmPhoneNumber();
-        mTextView = (TextView) findViewById(R.id.telephoneN_text_view);
-        mTextView.setText(mTemp);
+        ((TextView) findViewById(R.id.telephoneN_text_view)).
+                setText(((BankDetails) extraBank).getmPhoneNumber());
 
         mButton = (Button) findViewById(R.id.qualityEstimation_button);
-
-        // add mButton listener
-//        mButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View arg0) {
-//
-//                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-//                        mContext);
-//
-//                // set title
-//                alertDialogBuilder.setTitle("Пожалуйста оцените качество, работы нашего филиала.");
-//
-//                // set dialog message
-//                alertDialogBuilder
-//                        .setCancelable(true)
-//                        .setSingleChoiceItems(mEstimationGroup, -1, new DialogInterface.OnClickListener() {
-//                            public void onClick(DialogInterface dialog, int item) {
-//                                dialog.dismiss();// dismiss the alertbox after chose option
-//                                Intent intent = new Intent();
-//                                mEstimationMark = (String) mEstimationGroup[item];
-//                                intent.putExtra("mEstimationMark", mEstimationMark);
-//                                setResult(RESULT_OK, intent);
-//                            }
-//                        });
-//
-//                // create alert dialog
-//                AlertDialog alertDialog = alertDialogBuilder.create();
-//
-//                // show it
-//                alertDialog.show();
-//            }
-//        });
 
         return getWindow().getDecorView().getRootView();
 
@@ -94,6 +57,5 @@ public class DetailedInfoActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        //
     }
 }

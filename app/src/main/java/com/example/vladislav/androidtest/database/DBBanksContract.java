@@ -10,8 +10,6 @@ public final class DBBanksContract {
 
     private DBBanksContract() {}
 
-    public static final String[] columns = {"address","distance","name","estimationmark","phonenumber"};
-
     public static class BankEntry implements BaseColumns {
         public static final String TABLE_NAME = "BANKS";
         public static final String ADDRESS = "address";

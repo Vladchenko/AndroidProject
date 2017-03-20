@@ -19,7 +19,6 @@ import java.util.List;
 
 public class BankOfficesLoader extends CursorLoader {
 
-    //    private List<BankDetails> mList;
     private Cursor mCursor;
     private DBHelper dbHelper;
 

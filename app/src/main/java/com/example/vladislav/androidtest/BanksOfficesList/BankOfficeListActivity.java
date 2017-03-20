@@ -55,7 +55,6 @@ public class BankOfficeListActivity extends AppCompatActivity implements BankOff
      **/
     @Override
     public void onBankOfficeSelected(BankDetails bankOffice) {
-// TODO: fragmentTransaction replace
 
         fragment = new DetailedInfoFragment();
 
@@ -66,17 +65,13 @@ public class BankOfficeListActivity extends AppCompatActivity implements BankOff
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            // If the screen is now in portrait mode, we can show the
-            // dialog in-line with the list so we don't need this activity.
-//            Toast.makeText(this, "Landscape mode entered", Toast.LENGTH_SHORT).show();
             transaction.addToBackStack(null);
             if (mFragmentManager.getBackStackEntryCount() > 2) {
-                mFragmentManager.popBackStack(); // remove one (you can also remove more)
+                mFragmentManager.popBackStack();
             }
             transaction.replace(R.id.fragment_container, fragment).commit();
         } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             emptyTextView.setVisibility(View.GONE);
-//            transaction.addToBackStack("teststack");
             transaction.replace(R.id.bank_details_container, fragment).commit();
         }
 

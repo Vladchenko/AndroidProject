@@ -42,8 +42,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         } else {
             holder.estimationTextView.setText("");
         }
-        // No phone number in recycler layout
-//        holder.telephoneNTextView.setText(bankDetails.getmPhoneNumber());
     }
 
     @Override
@@ -66,8 +64,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView extraOfficeTextView;
         TextView distanceTextView;
         TextView estimationTextView;
-        // No phone number in recycler layout
-//        TextView telephoneNTextView;
 
         public ViewHolder2(View itemView) {
             super(itemView);
@@ -75,8 +71,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             extraOfficeTextView = (TextView) itemView.findViewById(R.id.extra_office_text_view);
             distanceTextView = (TextView) itemView.findViewById(R.id.distance_text_view);
             estimationTextView = (TextView) itemView.findViewById(R.id.estimation_mark_text_view);
-//            telephoneNTextView = (TextView)itemView.findViewById(R.id.telephoneN_text_view);
-            // No need to pass an image, it's already present in an activity.
         }
 
     }
