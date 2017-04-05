@@ -18,7 +18,7 @@ import java.util.List;
 public class BanksDetailsOperating {
 
     private boolean mDBPopulated;
-    private int mBanksNumberDefault = 5;
+    private int mBanksNumberDefault = 10;
     //    private int mBanksNumber = 10;
     private int mTemp;
     private List<BankDetails> mBanksDetailsList;
@@ -40,6 +40,7 @@ public class BanksDetailsOperating {
         // When willing to get data from database:
         if (Consts.GET_DATA_FROM_DB) {
             System.out.println("Using database to work with banks data.");
+            // If database is not populated with a banks data.
             if (!mDBPopulated) {
                 // Populating а table in a data base.
                 mDbHelper = DBHelper.getInstance();
@@ -61,7 +62,7 @@ public class BanksDetailsOperating {
                 // Reading a table from a database.
                 System.out.println("Database's Banks table contents present, reading it.");
                 mBanksDetailsList = new ArrayList<>();
-                // This is the part where we download a bank detailed info from a database.
+                // This is the part where we download a banks detailed info from a database.
                 mDbHelper = DBHelper.getInstance();
                 mCursor = mDbHelper.getReadableDatabase().query(
                         false,

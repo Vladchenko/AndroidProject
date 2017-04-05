@@ -6,7 +6,7 @@ package com.example.vladislav.androidtest;
 
 public class Consts {
 
-    public static final boolean GET_DATA_FROM_DB = true;
+    public static final boolean GET_DATA_FROM_DB = false;
     public static final String DATABASE_ALREADY_POPULATED = "DBPopulated";
     public static final String BANK_DETAILS_PARCELABLE = "bankDetails";
     public static final String ESTIMATION_MARK = "estimationMark";

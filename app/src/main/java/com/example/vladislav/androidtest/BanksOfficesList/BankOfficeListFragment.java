@@ -16,10 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.example.vladislav.androidtest.R;
 import com.example.vladislav.androidtest.Consts;
 import com.example.vladislav.androidtest.beans.BankDetails;
 import com.example.vladislav.androidtest.database.DBHelper;
+import com.example.vladislav.androidtest.datasource.BanksDetailsOperating;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +44,8 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
     private SharedPreferences.Editor mEditor;
 
     // Required empty public constructor
-    public BankOfficeListFragment() { }
+    public BankOfficeListFragment() {
+    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -92,7 +96,23 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
         mRecyclerView.setVisibility(GONE);
         mProgressBar.setVisibility(VISIBLE);
         mTextView.setVisibility(VISIBLE);
-        getLoaderManager().initLoader(0, null, this);
+        if (mList == null) {
+            if (Consts.GET_DATA_FROM_DB) {
+                // Getting dat from a loader that in its turn gets data from DB.
+                getLoaderManager().initLoader(0, null, this);
+            } else {
+                // Getting banks data at random.
+                mList = new BanksDetailsOperating(getContext()).getmBanksDetailsList();
+                updateDataAndViews();
+            }
+        }
+    }
+
+    private void updateDataAndViews() {
+        mAdapter.update(mList);
+        mProgressBar.setVisibility(GONE);
+        mRecyclerView.setVisibility(VISIBLE);
+        mTextView.setVisibility(GONE);
     }
 
     @Override
@@ -123,10 +143,7 @@ public class BankOfficeListFragment extends Fragment implements LoaderManager.Lo
             i++;
         }
 
-        mAdapter.update(mList);
-        mProgressBar.setVisibility(GONE);
-        mRecyclerView.setVisibility(VISIBLE);
-        mTextView.setVisibility(GONE);
+        updateDataAndViews();
 
     }
 

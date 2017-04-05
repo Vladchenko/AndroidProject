@@ -18,6 +18,7 @@ import com.example.vladislav.androidtest.beans.BankDetails;
 import com.example.vladislav.androidtest.BanksOfficesList.BankOfficeListFragment.BankOfficeCallbacks;
 import com.example.vladislav.androidtest.BankOfficeDetailedInfo.DetailedInfoFragment;
 import com.example.vladislav.androidtest.Consts;
+import com.example.vladislav.androidtest.datasource.BanksDetailsOperating;
 
 public class BankOfficeListActivity extends AppCompatActivity implements BankOfficeCallbacks,
         DetailedInfoFragment.OnFragmentInteractionListener {
@@ -26,6 +27,7 @@ public class BankOfficeListActivity extends AppCompatActivity implements BankOff
     private String mEstimationMark;
     private TextView emptyTextView;
     private Fragment fragment;
+    private static boolean portraitModeOn = true;
 
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
@@ -109,4 +111,24 @@ public class BankOfficeListActivity extends AppCompatActivity implements BankOff
 
     }
 
+    public void onConfigurationChanged(Configuration _newConfig) {
+
+        if (_newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            portraitModeOn = false;
+        }
+
+        if (_newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            portraitModeOn = true;
+        }
+
+        super.onConfigurationChanged(_newConfig);
+    }
+
+    public static boolean isPortraitModeOn() {
+        return portraitModeOn;
+    }
+
+    public static void setPortraitModeOn(boolean portraitModeOn) {
+        BankOfficeListActivity.portraitModeOn = portraitModeOn;
+    }
 }

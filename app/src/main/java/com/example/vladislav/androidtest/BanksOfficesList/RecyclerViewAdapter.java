@@ -36,11 +36,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.addressTextView.setText(bankDetails.getmAddress());
         holder.distanceTextView.setText(bankDetails.getmDistance());
         holder.extraOfficeTextView.setText(bankDetails.getmName());
-        if (bankDetails.getmEstimationMark() > -1) {
-            holder.estimationTextView.setText("Оценка "
-                    + Integer.toString(bankDetails.getmEstimationMark()));
-        } else {
-            holder.estimationTextView.setText("");
+        if (BankOfficeListActivity.isPortraitModeOn()) {
+            if (bankDetails.getmEstimationMark() > -1) {
+                System.out.println(bankDetails);
+                holder.estimationTextView.setText("Оценка "
+                        + Integer.toString(bankDetails.getmEstimationMark()));
+            } else {
+                holder.estimationTextView.setText("");
+            }
         }
     }
 
